@@ -1,0 +1,57 @@
+#loginImage {
+	background-image: url('/img/login-background.jpg');
+	background-size: cover;
+	min-height: 100vh;
+}
+
+#loginPagebar {
+	text-align: center;
+	padding-top: 4%;
+}
+
+#loginPagebar button {
+	width:30%;
+	font-size:1.3rem;
+}
+
+#logo {
+	width:70%;
+	margin: 0 auto;
+}
+
+#loginForm label{
+	font-size: 1.4rem;
+}
+
+#loginForm input{
+	border-radius: 50px;
+	width: 70%;
+	margin: 0 auto;
+	text-align: center;
+	padding: 5px;
+	font-size:1.2rem;
+}
+
+#loginForm button{
+	margin-top:2%;
+}
+
+#loginPagebar>p {
+	margin-top: 5%;
+	font-size: 1.4rem;
+}
+
+#registerSuccess {
+	display: none;
+}
+
+#registerFailure {
+	display:none;
+	color: red;
+	font-size: 0.8rem;
+}
+
+#loginFailure {
+	color: red;
+	font-size: 0.8rem;
+}
