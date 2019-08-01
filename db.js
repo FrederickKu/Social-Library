@@ -65,9 +65,8 @@ pool.on('error', function (err) {
 const allloginModelsFunction = require('./models/login');
 const loginModelsObject = allloginModelsFunction( pool );
 
-
-const allUserModelsFunction = require('./models/user');
-const userModelsObject = allUserModelsFunction( pool );
+const allBooksModelsFunction = require('./models/book');
+const booksModelsObject = allBooksModelsFunction( pool );
 
 
 /*
@@ -94,5 +93,6 @@ module.exports = {
   /*
    * ADD APP MODELS HERE
    */
-  login: loginModelsObject
+  login: loginModelsObject,
+  books:booksModelsObject
 };

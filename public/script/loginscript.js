@@ -45,30 +45,3 @@ var register = function() {
 }
 
 document.getElementById('registerUser').onclick = register;
-
-// var loginCheck = function() {
-
-//   let data = {
-//     username: document.getElementById('loginUsername').value,
-//     password: document.getElementById('loginPassword').value,
-//   };
-//   console.log(data);
-
-//   var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-
-//   xmlhttp.addEventListener("load", function(){  
-//     if(this.responseText === 'password') {
-//       document.getElementById('loginFailure').innerText='*Wrong password. Please try again.';
-//     } else if(this.responseText==='username') {
-//       document.getElementById('loginFailure').innerText='*Incorrect username. Please try again.';
-//     }
-//   });
-
-//   xmlhttp.open("POST", '/');
-//   xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-//   xmlhttp.send(JSON.stringify(data));
-
-// }
-
-// document.getElementById('login').onclick = loginCheck;

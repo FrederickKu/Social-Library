@@ -3,9 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
 	username TEXT, 
 	password TEXT, 
 	user_name TEXT,
-	user_photo TEXT,
-	user_gender TEXT,
-	user_dob DATE
+	user_photo TEXT
 );
 
 CREATE TABLE IF NOT EXISTS books (
@@ -13,15 +11,15 @@ CREATE TABLE IF NOT EXISTS books (
 	book_title TEXT,
 	book_author TEXT,
 	book_synopsis TEXT,
-	owner_summary TEXT,
 	book_image  TEXT,
-	book_status TEXT
+	user_id INT
 );
 
-CREATE TABLE IF NOT EXISTS bookrentals (
+CREATE TABLE IF NOT EXISTS users_books_history (
 	id SERIAL PRIMARY KEY,
-	renter_id INT,
-	book_id INT
+	user_id INT,
+	book_id INT,
+	start_owned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS messages (
@@ -42,6 +40,7 @@ CREATE TABLE IF NOT EXISTS bookreviews (
 	id SERIAL PRIMARY KEY,
 	user_id INT,
 	book_id INT,
-	book_review TEXT
+	book_review TEXT,
+	review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

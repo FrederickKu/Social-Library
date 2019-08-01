@@ -22,6 +22,7 @@ module.exports = (db) => {
           let sessionCookie = sha256(`true` + SALT + user);
 
           response.cookie('meow',sessionCookie);
+          response.cookie('woof',user);
           response.redirect('/home/' + user);
         }else if (loginError){
           let data = {

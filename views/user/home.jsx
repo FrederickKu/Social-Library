@@ -3,20 +3,21 @@ var HEAD = require('../layouts/head.jsx');
 var BODY = require('../layouts/body.jsx');
 var NAVBAR = require('../layouts/navbar.jsx');
 
-class Login extends React.Component {
+class Home extends React.Component {
   render() {
     return (
     	<html>
 	    	<HEAD>
 	    		<title>Social Library: </title>
+	    		<link rel={"stylesheet"} href={`/css/style.css`} />
 	    	</HEAD>
 	    	<BODY>
 	    	<NAVBAR />
 
-	        </BODY>
+	    	</BODY>
         </html>   
     );
   }
 }
 
-module.exports = Login;
+module.exports = Home;

@@ -1,0 +1,105 @@
+body {
+	background-color: rgb(240, 240, 240);
+}
+
+#navbarLogo {
+	width: 4vw ;
+}
+
+.nav-link {
+	font-size: 1.8rem;
+	color: black;
+}
+#profilecontainer {
+	display:flex;
+	flex-wrap: wrap;
+	align-items: center;
+	text-align: right;
+}
+#profileimagecontainer {
+	display: inline-block;
+	width:4vw;
+}
+
+#profiletext {
+	font-size:1.2rem;
+	margin:0;
+}
+
+#navprofile {
+	width: 99%;
+	box-sizing: border-box;
+}
+
+.dropdown-item{
+	font-size:1.3rem;
+}
+
+.dropdown-toggle::after {
+    display:none !important;
+}
+
+#display-book{
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-around;	
+	align-content: center;
+	padding-right:100px;
+	padding-left: 100px;
+}
+
+.card {
+	display: flex;
+	flex-wrap: wrap;
+	width: 23rem;
+	margin-bottom: 2rem;
+}
+
+.card img {
+	display: inline-block;
+	width: 48%;
+	margin: 2% 5% 0;
+}
+
+.card-link{
+	color: black;
+	text-decoration: none;
+}
+
+.card-link::hover{
+	text-decoration:none;
+}
+
+.card-book-review{
+	display: inline-block;
+	width: 30%;
+	text-align: center;
+	font-size: 4rem;
+}
+.card-body >h5{
+	font-size:1.7rem;
+	margin-bottom: 0;
+}
+
+#card-author{
+	font-size:1.2rem;
+	margin:0;
+}
+
+.search-bar{
+	margin: 3rem auto;
+    padding: 0 141px;
+}
+
+#allbook-search{
+	border-style: none;
+	font-size: 1.5rem;
+	border-bottom: 1px solid grey;
+}
+
+.searchAllTitle {
+	display: block;
+	width:97%;
+	font-size: 2rem;
+	font-weight:bold;
+}
