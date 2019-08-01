@@ -1,5 +1,11 @@
-body {
-	background-color: rgb(240, 240, 240);
+main {
+	background-color: #D4D4D4;
+	padding-top: 1%;
+	min-height: 100vh;
+}
+nav {
+	background-color: #FFFFFF;
+	border-radius:50px;
 }
 
 #navbarLogo {
@@ -52,6 +58,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	width: 23rem;
+	height: 25rem;
 	margin-bottom: 2rem;
 }
 
@@ -89,12 +96,14 @@ body {
 .search-bar{
 	margin: 3rem auto;
     padding: 0 141px;
+    border-radius: 10px;
 }
 
 #allbook-search{
 	border-style: none;
 	font-size: 1.5rem;
-	border-bottom: 1px solid grey;
+	border-radius: 50px;
+	padding: 40px;
 }
 
 .searchAllTitle {
@@ -102,4 +111,31 @@ body {
 	width:97%;
 	font-size: 2rem;
 	font-weight:bold;
+}
+#profile-book-header{
+	text-align: center;
+}
+
+#profileBookDisplay {
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-around;	
+	align-content: center;
+}
+
+#profileBookDisplay > form{
+	width: 90%;
+	margin: 5% 0;
+}
+
+.profile-card {
+	text-align: center;
+	margin-top: 15%;
+	width:100%;
+}
+
+.profile-card img{
+	width:50%;
+	height: auto;
+	margin: 10% auto; 
 }

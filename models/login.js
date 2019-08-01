@@ -15,6 +15,7 @@ module.exports = (dbPoolInstance) => {
     let values = [userDetails.username];
     dbPoolInstance.query(queryString,values, (error,queryResult)=> {
       if (error) {
+        console.log(error);
         callback(error,0,null,null);
       } else {
         if (queryResult.rows.length>0){
@@ -45,6 +46,7 @@ module.exports = (dbPoolInstance) => {
         let values = [userDetails.username,passwordHash,userDetails.user_name,userDetails.user_photo];
         dbPoolInstance.query(queryString, values, (error,queryResult)=>{
           if (error){
+            console.log(error);
             callback (error,false);
           } else {
             callback(null,true);
@@ -55,12 +57,77 @@ module.exports = (dbPoolInstance) => {
       }
     });
   };
- 
+
+  let getUserInfo = (callback,username,query) => {
+    if (query === undefined){
+      let queryString = "SELECT * FROM (SELECT id AS user_id, user_name,user_photo FROM users) AS u INNER JOIN books ON (u.user_id = books.user_id) WHERE books.user_id = (SELECT id FROM users WHERE username = $1)";
+      let values = [username];
+
+      dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+        if (error){
+          console.log(error);
+          callback(error,null);
+        } else {
+          let data = {
+            username:username,
+            name: queryResult.rows[0].user_name,
+            photo:queryResult.rows[0].user_photo,
+            books:queryResult.rows
+          }
+          callback(null,data);
+        }
+      })
+    } else {
+      let queryString = "SELECT * FROM (SELECT id AS user_id, user_name,user_photo FROM users) AS u INNER JOIN books ON (u.user_id = books.user_id) WHERE books.user_id = (SELECT id FROM users WHERE username = $1) AND books.book_title ILIKE $2";
+      let values = [username,'%'+query+'%'];
+
+      dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+        if (error){
+          console.log(error);
+          callback(error,null);
+        } else {
+          let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+          let data = {
+            byTitle:result
+          }
+
+          let queryString = "SELECT * FROM (SELECT id AS user_id, user_name,user_photo FROM users) AS u INNER JOIN books ON (u.user_id = books.user_id) WHERE books.user_id = (SELECT id FROM users WHERE username = $1) AND books.book_author ILIKE $2";
+          let values = [username,'%'+query+'%'];
+
+          dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+            if (error){
+              console.log(error);
+              callback(error,null);
+            } else {
+              let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+              data.byAuthor=result;
+
+              let queryString = "SELECT id, user_name, user_photo FROM users WHERE username = $1";
+              let values = [username];
+              dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                if (error) {
+                  console.log(error);
+                  callback(error,null);
+                } else {
+                  data.username=username;
+                  data.name = queryResult.rows[0].user_name;
+                  data.photo = queryResult.rows[0].user_photo;
+                  callback(null,data);
+                }
+              })
+            }
+          })
+        }    
+      })
+
+    }
+  };
 
 
   return {
     checkLogin,
-    addUser
+    addUser,
+    getUserInfo
   };
 
 };

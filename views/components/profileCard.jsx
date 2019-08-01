@@ -3,15 +3,11 @@ var React = require("react");
 class ProfileCard extends React.Component {
   render() {
     return (
-      <div className={"card"}>
-        <a href="#">
-        <img src = {this.props.book.book_image} className={'card-book-img'} />
-        <p className={'card-link card-book-review'}> 4.5 </p>
+      <div className={"card profile-card"}>
+        <img src = {this.props.photo} className={'profile-card-img'} />
         <div className={"card-body"}>
-          <h5 className={'card-link card-title'}>{this.props.book.book_title}</h5>
-          <p className={'card-text card-link'} id={'card-author'}>{this.props.book.book_author}</p>
+          <h5 className={'card-link card-title'}>{this.props.name}</h5>
         </div>
-        </a>
       </div>
     );
   }

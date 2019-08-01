@@ -49,9 +49,35 @@ module.exports = (db) => {
         db.login.addUser(callback,request.body);
   };
 
+
   let displayHomePage = (request,response) => {
-      response.render('user/home');
-  }
+
+    if (Object.keys(request.query).length!==0) {
+      let callback = function(error,data){
+        if (error) {
+          response.status(404);
+        } else {
+          data.searchStatus=true;
+          console.log(data);
+
+          response.render('user/home',data);
+        }
+      }
+
+      db.login.getUserInfo(callback,request.params.username,request.query.search);
+    } else {
+      let callback = function(error, data){
+        if (error){
+          response.status(404);
+        } else {
+          data.searchStatus=false;
+          response.render('user/home',data);
+        }
+      }
+      
+      db.login.getUserInfo(callback,request.params.username);
+    }
+}
 
 
   /**

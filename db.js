@@ -94,5 +94,5 @@ module.exports = {
    * ADD APP MODELS HERE
    */
   login: loginModelsObject,
-  books:booksModelsObject
+  books: booksModelsObject
 };

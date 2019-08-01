@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS books (
 	user_id INT
 );
 
-CREATE TABLE IF NOT EXISTS users_books_history (
+CREATE TABLE IF NOT EXISTS book_ownerhistory (
 	id SERIAL PRIMARY KEY,
 	user_id INT,
 	book_id INT,
