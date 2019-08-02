@@ -24,10 +24,7 @@ class Allrequest extends React.Component {
 	  		} else if (request.swap_status === "pending_swap"){
 	  			return(<div>
 	  					<p>{request.book_title}|{request.book_author}|{request.recipient_username}| {request.swap_status}</p>
-	  					<form method={'GET'} action={'/request/'+this.props.username+'/'+request.id}>
-	  						<input type={"hidden"} name={"request"} defaultValue={request.id} />
-	  						<button type={'submit'}>Go to Request</button>
-	  					</form>
+	  					<a href={'/request/'+this.props.username+'/'+request.id}><button>Go to Request</button></a>
 	  					</div>
 	  				);
 	  		} else if(request.swap_status === "cancelled"){
@@ -50,10 +47,7 @@ class Allrequest extends React.Component {
 	  		} else if (request.swap_status === "pending_swap"){
 	  			return(<div>
 	  					<p>{request.book_title}|{request.book_author}|{request.recipient_username}| {request.swap_status}</p>
-	  					<form method={'GET'} action={'/request/'+this.props.username+'/'+request.id}>
-	  						<input type={"hidden"} name={"request"} defaultValue={request.id} />
-	  						<button type={'submit'}>Go to Request</button>
-	  					</form>
+	  					<a href={'/request/'+this.props.username+'/'+request.id}><button>Go to Request</button></a>
 	  					</div>
 	  				);
 	  		} else if(request.swap_status === "cancelled"){

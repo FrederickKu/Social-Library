@@ -26,6 +26,8 @@ module.exports = (app, allModels) => {
 
   //book routes
   app.get('/books', booksControllerCallbacks.getAllBooks);
+  app.get('/books/add',booksControllerCallbacks.displayAddBookPage);
+  app.post('/books/add',booksControllerCallbacks.addBook);
   app.get('/books/:id',booksControllerCallbacks.getIndividualBook);
   app.delete('/books/:id',booksControllerCallbacks.deleteIndividualBook);
   app.get('/books/:id/edit',booksControllerCallbacks.editIndividualBook);
@@ -37,4 +39,5 @@ module.exports = (app, allModels) => {
   app.put('/request/:username/accept',requestControllerCallbacks.acceptRequest);
   app.put('/request/:username/reject',requestControllerCallbacks.rejectRequest);
   app.get('/request/:username/:id',requestControllerCallbacks.showRequestPage);
+  app.put('/request/:username/:id/confirm',requestControllerCallbacks.confirmSwap);
 }

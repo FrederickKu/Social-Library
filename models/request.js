@@ -120,11 +120,190 @@ module.exports = (dbPoolInstance) => {
     });
   }
 
+  let showRequestPage = (callback,username,request_id) => {
+    //Check if owner
+    var request_id=parseInt(request_id);
+    let queryString = "SELECT owner_id , username, user_name, user_photo FROM (SELECT * FROM swap WHERE id = $1) AS request INNER JOIN users ON (request.owner_id = users.id) WHERE users.username = $2";
+    let values = [request_id,username];
+
+    dbPoolInstance.query(queryString,values, (error,queryResult)=>{
+      if (error){
+        console.log(error);
+        callback(error,null,null);
+      } else if (queryResult.rows.length>0){
+        //owner of book of request
+          var data = {
+              ownerDetail: queryResult.rows[0]
+          }
+
+          let queryString="SELECT * FROM (SELECT * FROM swap WHERE id = $1) AS request INNER JOIN (SELECT id AS book_id, book_title, book_author, book_synopsis, book_image, user_id as owner_id FROM books) AS book_details ON (request.book_id = book_details.book_id)";
+          let values = [request_id];
+
+          dbPoolInstance.query(queryString,values, (error,queryResult)=>{
+            if (error){
+              console.log(error);
+              callback(error,null,null);
+            } else {
+              data.requestBookDetail = queryResult.rows[0];
+              let queryString = "SELECT recipient_id,username,user_name,user_photo FROM (SELECT * FROM swap where id=$1) AS request INNER JOIN users on (request.recipient_id=users.id)";
+              let values = [request_id];
+
+              dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                if (error){
+                  console.log(error);
+                  callback(error,null,null);
+                } else {
+                  data.recipientDetails = queryResult.rows[0];
+                  console.log()
+                  callback (null,true,data);
+                }
+              })
+            }
+          });
+      } else {
+        //not owner of book of request
+          let queryString="SELECT recipient_id,username,user_name,user_photo FROM (SELECT * FROM swap WHERE id = $1) AS request INNER JOIN users ON (request.recipient_id = users.id) WHERE users.username=$2";
+          let values =[request_id,username];
+
+          dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+            if (error){
+              console.log('1'+error);
+              callback(error,null,null);
+            } else if(queryResult.rows.length>0) {
+              //recipient of bookr equest
+              var data = {
+                recipientDetails: queryResult.rows[0]
+              }
+
+              let queryString = "SELECT owner_id, username,user_name,user_photo FROM (SELECT * FROM swap where id = $1) AS request INNER JOIN users ON (request.owner_id=users.id)";
+              let values = [request_id];
+
+              dbPoolInstance.query(queryString,values, (error,queryResult)=>{
+                if (error){
+                  console.log('2'+error);
+                  callback(error,null,null);
+                } else {
+                  data.ownerDetail=queryResult.rows[0];
+
+                  let queryString="SELECT * FROM (SELECT * FROM swap WHERE id = $1) AS request INNER JOIN (SELECT id AS book_id, book_title, book_author, book_synopsis, book_image, user_id as owner_id FROM books) AS book_details ON (request.book_id = book_details.book_id)";
+                  let values = [request_id];
+
+                  dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                    if(error){
+                      console.log(error);
+                      callback(error,null,null);
+                    } else {
+                      data.requestBookDetail=queryResult.rows[0];
+                      callback(null,true,data);
+                    }
+                  })
+                }
+              })
+            } else {
+              callback(null,false,null);
+            }
+          });
+        }
+    });
+  }
+
+  let confirmSwap = function(callback,username,request_id) {
+    var request_id=parseInt(request_id);
+    let queryString = "SELECT owner_id , username, user_name, user_photo FROM (SELECT * FROM swap WHERE id = $1) AS request INNER JOIN users ON (request.owner_id = users.id) WHERE users.username = $2";
+    let values = [request_id,username];
+
+    dbPoolInstance.query(queryString,values, (error,queryResult)=>{
+      if (error) {
+        console.log(error);
+        callback(error);
+      } else if (queryResult.rows.length>0) {
+          //is owner
+          let queryString ='UPDATE swap SET owner_handshake = TRUE WHERE id=$1 RETURNING *';
+          let values= [request_id]; 
+
+          dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+            if (error) {
+              console.log(error);
+              callback(error);
+            } else {
+              if (queryResult.rows[0].recipient_handshake){
+                //handshake done update book ownership
+                let queryString = "UPDATE books SET user_id = $1 WHERE id= $2 RETURNING *;"
+                let values = [queryResult.rows[0].recipient_id,queryResult.rows[0].book_id];
+
+                dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                  if(error) {
+                    console.log(error);
+                    callback(error);
+                  } else {
+                    //update ownerhistory
+                    let queryString ="INSERT INTO book_ownerhistory (user_id,book_id) VALUES ($1,$2)";
+                    let values = [queryResult.rows[0].user_id,queryResult.rows[0].id];
+                    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                      if(error){
+                        console.log(error);
+                        callback(error);
+                      } else {
+                        callback(null);
+                      }
+                    });
+                  }
+                });
+              } else{
+                callback(null);
+              }
+            }
+          });
+
+      } else {
+          //is not owner
+          let queryString = 'UPDATE swap SET recipient_handshake = TRUE WHERE id=$1 RETURNING *';
+          let values = [request_id];
+
+          dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+            if (error){
+              console.log(error);
+              callback(error);
+            } else {
+              if (queryResult.rows[0].owner_handshake){
+                //handshake done update book ownership
+                let queryString = "UPDATE books SET user_id = $1 WHERE id= $2 RETURNING *;"
+                let values = [queryResult.rows[0].recipient_id,queryResult.rows[0].book_id];
+
+                dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                  if(error) {
+                    console.log(error);
+                    callback(error);
+                  } else {
+                    //update ownerhistory
+                    let queryString ="INSERT INTO book_ownerhistory (user_id,book_id) VALUES ($1,$2)";
+                    let values = [queryResult.rows[0].user_id,queryResult.rows[0].id];
+                    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                      if(error){
+                        console.log(error);
+                        callback(error);
+                      } else {
+                        callback(null);
+                      }
+                    });
+                  }
+                });
+              } else{
+                callback(null);
+              }              
+            }
+          });
+      }
+    });
+  }
+
   return {
     getAllRequest,
     sendRequest,
     acceptRequest,
-    rejectRequest
+    rejectRequest,
+    showRequestPage,
+    confirmSwap
   };
 
 };

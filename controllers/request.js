@@ -60,7 +60,32 @@ module.exports = (db) => {
   }
 
   let showRequestPage =(request,response)=>{
-    response.send('requestpage');
+    let callback=function(error,authenticate,data){
+      console.log(data);
+      if (error){
+        response.sendStatus(404);
+      } else if (authenticate){
+        data.username=request.params.username;
+        data.requestid=request.params.id;
+        response.render('request/request',data);
+      } else {
+        response.redirect('/home/'+request.cookies.woof);
+      }
+    }
+
+    db.request.showRequestPage(callback,request.params.username,request.params.id);
+  }
+
+  let confirmSwap = (request,response) =>{
+    let callback=function(error) {
+      if (error){
+        response.sendStatus(404);
+      } else {
+        response.redirect('/request/'+request.params.username+'/'+request.params.id);
+      }
+      
+    }
+    db.request.confirmSwap(callback,request.params.username,request.params.id);
   }
   /**
    * ===========================================
@@ -72,7 +97,8 @@ module.exports = (db) => {
     sendRequest:sendRequest,
     acceptRequest:acceptRequest,
     rejectRequest:rejectRequest,
-    showRequestPage:showRequestPage
+    showRequestPage:showRequestPage,
+    confirmSwap:confirmSwap
   };
 
 }
