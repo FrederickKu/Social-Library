@@ -68,13 +68,32 @@ module.exports = (dbPoolInstance) => {
           console.log(error);
           callback(error,null);
         } else {
-          let data = {
-            username:username,
-            name: queryResult.rows[0].user_name,
-            photo:queryResult.rows[0].user_photo,
-            books:queryResult.rows
-          }
-          callback(null,data);
+          if (queryResult.rows.length===0) {
+             let queryString = "SELECT id, user_name, user_photo FROM users WHERE username = $1";
+              let values = [username];
+              dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                if (error) {
+                  console.log(error);
+                  callback(error,null);
+                } else {
+                  let data = {
+                    username:username,
+                    name: queryResult.rows[0].user_name,
+                    photo:queryResult.rows[0].user_photo,
+                    books:[]
+                  }
+                  callback(null,data);
+                }
+              })
+            } else {
+                let data = {
+                  username:username,
+                  name: queryResult.rows[0].user_name,
+                  photo:queryResult.rows[0].user_photo,
+                  books:queryResult.rows
+                }
+                callback(null,data);
+            }
         }
       })
     } else {

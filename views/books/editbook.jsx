@@ -4,7 +4,7 @@ var BODY = require('../layouts/body.jsx');
 var NAVBAR = require('../layouts/navbar.jsx');
 var BOOKCARD = require('../components/bookCard.jsx');
 
-class Home extends React.Component {
+class Editbooks extends React.Component {
   render() {
 			return (
 				<html>
@@ -62,4 +62,4 @@ class Home extends React.Component {
 		}
   }
 
-module.exports = Home;
+module.exports = Editbooks;

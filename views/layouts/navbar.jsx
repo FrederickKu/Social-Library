@@ -15,7 +15,7 @@ class Navbar extends React.Component {
                   <div className={"dropdown-menu"} aria-labelledby={"navbarDropdown"}>
                     <a className={"dropdown-item"} href={'/home/'+this.props.username}>My Profile</a>
                     <a class="dropdown-item" href="#">Add Book</a>
-                    <a class="dropdown-item" href="#">Requests Information</a>
+                    <a class="dropdown-item" href={"/request/"+this.props.username}>Requests Information</a>
                   </div>
                 </div>
                 <a className={"nav-item active nav-link"} href={'/books'}>The Exchange</a>

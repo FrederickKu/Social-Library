@@ -4,7 +4,7 @@ var BODY = require('../layouts/body.jsx');
 var NAVBAR = require('../layouts/navbar.jsx');
 var BOOKCARD = require('../components/bookCard.jsx');
 
-class Home extends React.Component {
+class Allbooks extends React.Component {
   render() {
   	if (this.props.searchStatus){
   		var searchBooks = this.props.byTitle.map(book => {
@@ -69,4 +69,4 @@ class Home extends React.Component {
   }
 }
 
-module.exports = Home;
+module.exports = Allbooks;

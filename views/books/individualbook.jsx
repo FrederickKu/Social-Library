@@ -4,7 +4,7 @@ var BODY = require('../layouts/body.jsx');
 var NAVBAR = require('../layouts/navbar.jsx');
 var BOOKCARD = require('../components/bookCard.jsx');
 
-class Home extends React.Component {
+class Individualbook extends React.Component {
   render() {
   		let owners = this.props.ownerHistory.map((owner,index) => {
   			return (<tr>
@@ -91,7 +91,7 @@ class Home extends React.Component {
 					<BODY>
 						<NAVBAR username={this.props.username} />
 						<div className = {'container-fluid mt-5 sub-nav'}>
-							<form method={'POST'} action={'#'}>
+							<form method={'POST'} action={'/books/'+this.props.book.id+'/request'}>
 								<button type={'submit'}>Request</button>
 							</form>
 						</div>
@@ -142,5 +142,4 @@ class Home extends React.Component {
 		}
 	}
   }
-
-module.exports = Home;
+module.exports = Individualbook;
