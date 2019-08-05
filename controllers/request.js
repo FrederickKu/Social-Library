@@ -1,3 +1,6 @@
+const sha256=require('js-sha256');
+const SALT = 'ThIs is ThE SecrEt pHrasE.';
+
 module.exports = (db) => {
 
   /**
