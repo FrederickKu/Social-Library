@@ -14,7 +14,7 @@ class Navbar extends React.Component {
                   <a className={"nav-link dropdown-toggle"} href={"#"} role={"button"} data-toggle={"dropdown"} aria-haspopup="true" aria-expanded="false">Profile</a>
                   <div className={"dropdown-menu"} aria-labelledby={"navbarDropdown"}>
                     <a className={"dropdown-item"} href={'/home/'+this.props.username}>My Profile</a>
-                    <a class="dropdown-item" href="#">Add Book</a>
+                    <a class="dropdown-item" href={'/books/add'}>Add Book</a>
                     <a class="dropdown-item" href={"/request/"+this.props.username}>Requests Information</a>
                   </div>
                 </div>
@@ -22,13 +22,13 @@ class Navbar extends React.Component {
             </div>
             <div className={"nav navbar-nav mr-0"} id={'profilecontainer'}>
                 <div className={'nav-item'}>  
-                  <p id={'profiletext'}>Username<br />Name</p>
+                  <p id={'profiletext'}>{this.props.username}<br />{this.props.name}</p>
                 </div>
                 <div class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle" href="#" id="profileimagecontainer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img id={'navprofile'} src={'/img/defaultperson.png'} /></a>
+                  <a class="nav-link dropdown-toggle" href="#" id="profileimagecontainer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img id={'navprofile'} src={this.props.photo} /></a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Account Settings</a>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href={'/logout'}>Logout</a>
                   </div>
                 </div>
             </div> 

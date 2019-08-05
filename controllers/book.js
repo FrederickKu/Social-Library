@@ -89,6 +89,34 @@ module.exports = (db) => {
     db.books.deleteIndividualBook(callback,request.params.id);
   }
 
+  let displayAddPage = (request,response) => {
+    let data = {
+      username: request.cookies.woof
+    }
+    response.render('books/addbook',data)
+  }
+
+  let addBook = (request,response) => {
+    let callback = (error,bookID) =>{
+      if (error){
+        response.status(404);
+      } else {
+        response.redirect('/books/'+bookID);
+      }
+    }
+    db.books.addBook(callback,request.body,request.cookies.woof);
+  }
+
+  let addReview = (request,response) =>{
+    let callback = (error, bookID) =>{
+      if (error){
+        response.status(404);
+      } else {
+        response.redirect('/books/'+bookID);
+      }
+    }
+    db.books.addReview(callback,request.body.book_review,request.params.id,request.cookies.woof);
+  }
   /**
    * ===========================================
    * Export controller functions as a module
@@ -99,7 +127,10 @@ module.exports = (db) => {
     getIndividualBook:getIndividualBook,
     editIndividualBook:editIndividualBook,
     doEdit: doEdit,
-    deleteIndividualBook:deleteIndividualBook
+    deleteIndividualBook:deleteIndividualBook,
+    displayAddPage:displayAddPage,
+    addBook:addBook,
+    addReview:addReview
   };
 
 }

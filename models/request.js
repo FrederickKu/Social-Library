@@ -227,24 +227,33 @@ module.exports = (dbPoolInstance) => {
               callback(error);
             } else {
               if (queryResult.rows[0].recipient_handshake){
-                //handshake done update book ownership
-                let queryString = "UPDATE books SET user_id = $1 WHERE id= $2 RETURNING *;"
-                let values = [queryResult.rows[0].recipient_id,queryResult.rows[0].book_id];
-
+                let queryString = "UPDATE swap SET swap_status = 'completed' WHERE id = $1 RETURNING *;"
+                let values = [request_id];
                 dbPoolInstance.query(queryString,values,(error,queryResult)=>{
-                  if(error) {
+                  if (error) {
                     console.log(error);
                     callback(error);
-                  } else {
-                    //update ownerhistory
-                    let queryString ="INSERT INTO book_ownerhistory (user_id,book_id) VALUES ($1,$2)";
-                    let values = [queryResult.rows[0].user_id,queryResult.rows[0].id];
+                  }else {
+                    //handshake done update book ownership
+                    let queryString = "UPDATE books SET user_id = $1, book_status = 'available' WHERE id= $2 RETURNING *;"
+                    let values = [queryResult.rows[0].recipient_id,queryResult.rows[0].book_id];
+
                     dbPoolInstance.query(queryString,values,(error,queryResult)=>{
-                      if(error){
+                      if(error) {
                         console.log(error);
                         callback(error);
                       } else {
-                        callback(null);
+                        //update ownerhistory
+                        let queryString ="INSERT INTO book_ownerhistory (user_id,book_id) VALUES ($1,$2)";
+                        let values = [queryResult.rows[0].user_id,queryResult.rows[0].id];
+                        dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                          if(error){
+                            console.log(error);
+                            callback(error);
+                          } else {
+                            callback(null);
+                          }
+                        });
                       }
                     });
                   }
@@ -266,24 +275,33 @@ module.exports = (dbPoolInstance) => {
               callback(error);
             } else {
               if (queryResult.rows[0].owner_handshake){
-                //handshake done update book ownership
-                let queryString = "UPDATE books SET user_id = $1 WHERE id= $2 RETURNING *;"
-                let values = [queryResult.rows[0].recipient_id,queryResult.rows[0].book_id];
-
+                let queryString = "UPDATE swap SET swap_status = 'completed' WHERE id = $1 RETURNING *;"
+                let values = [request_id];
                 dbPoolInstance.query(queryString,values,(error,queryResult)=>{
-                  if(error) {
+                  if (error) {
                     console.log(error);
                     callback(error);
-                  } else {
-                    //update ownerhistory
-                    let queryString ="INSERT INTO book_ownerhistory (user_id,book_id) VALUES ($1,$2)";
-                    let values = [queryResult.rows[0].user_id,queryResult.rows[0].id];
+                  }else {
+                //handshake done update book ownership
+                    let queryString = "UPDATE books SET user_id = $1, book_status = 'available' WHERE id= $2 RETURNING *;"
+                    let values = [queryResult.rows[0].recipient_id,queryResult.rows[0].book_id];
+
                     dbPoolInstance.query(queryString,values,(error,queryResult)=>{
-                      if(error){
+                      if(error) {
                         console.log(error);
                         callback(error);
                       } else {
-                        callback(null);
+                        //update ownerhistory
+                        let queryString ="INSERT INTO book_ownerhistory (user_id,book_id) VALUES ($1,$2)";
+                        let values = [queryResult.rows[0].user_id,queryResult.rows[0].id];
+                        dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                          if(error){
+                            console.log(error);
+                            callback(error);
+                          } else {
+                            callback(null);
+                          }
+                        });
                       }
                     });
                   }

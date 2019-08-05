@@ -58,6 +58,7 @@ module.exports = (db) => {
           response.status(404);
         } else {
           data.searchStatus=true;
+          data.querySearch = request.query.search;
           console.log(data);
 
           response.render('user/home',data);
@@ -79,6 +80,15 @@ module.exports = (db) => {
     }
 }
 
+  let logout = (request,response) =>{
+    response.clearCookie('meow');
+    response.clearCookie('woof');
+    response.redirect('/');
+  }
+
+  let redirectLogin = (request,response)=>{
+    response.redirect('/');
+  }
 
   /**
    * ===========================================
@@ -89,7 +99,9 @@ module.exports = (db) => {
     login: displayLoginPage,
     loginCheck: checkLogin,
     addUser:addUser,
-    home: displayHomePage
+    home: displayHomePage,
+    logout:logout,
+    redirectLogin:redirectLogin
   };
 
 }

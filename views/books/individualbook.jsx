@@ -15,10 +15,13 @@ class Individualbook extends React.Component {
   		})
 
   		let reviews = this.props.bookReviews.map((review,index) => {
-  			return ( <div className={'mt-2'}>
+  			return ( <div className={'mt-2 reviews'}>
   						<p>{review.book_review}</p>
-  						<span>{review.username}</span>
-  						<span>{String(review.review_date).slice(0,10)}</span>
+  						<div id={'username_date'}>
+  							<span id={'left'}>{review.username}</span>
+  							<span id={'right'}>{String(review.review_date).slice(0,10)}</span>
+  						</div>
+  						<div style={{clear: 'both'}}></div>
   					 </div>)
   		})
 
@@ -31,24 +34,53 @@ class Individualbook extends React.Component {
 					</HEAD>
 					<BODY>
 						<NAVBAR username={this.props.username} />
-						<div className = {'container-fluid mt-5 sub-nav'}>
-							<a href={'/books/'+this.props.book.id+'/edit'}><button> Edit </button></a>
-							<span> | </span>
-							<form method={'POST'} action={'/books/'+this.props.book.id+'?_method=DELETE'}>
-								<button type={'submit'}>Delete Book</button>
-							</form>
-						</div>
-						<div className = {'container-fluid mt-4'} >
+						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
-				    			<div className={'col-2 offset-2'}>
-				    				<div className={"card"}>
-	        							<img src = {this.props.book.book_image} className={'card-book-img'} />
-								        <div className={"card-body"}>
-								          <h5 className={'card-link card-title'}>{this.props.book.book_title}</h5>
-								          <p className={'card-text card-link'} id={'card-author'}>{this.props.book.book_author}</p>
-								        </div>
-								    </div>
-				    				<div id={'ownerhistory'}>
+				    			<div className={'col-2 offset-3'}>
+	        						<img src = {this.props.book.book_image} id={'individualBookImage'} />
+								    <div className = {'mt-3'} id ={'individualBookButtons'}>
+				           				<button type={"button"} id={'editbook'} className={"btn btn-dark mb-2"} data-toggle={"modal"} data-target={"#editBookModal"}> Edit Book Details </button>
+										<form method={'POST'} action={'/books/'+this.props.book.id+'?_method=DELETE'}>
+											<button className={'btn btn-dark'} type={'submit'}>Delete Book</button>
+										</form>
+										<div className={"modal fade"} id={"editBookModal"} tabindex={"-1"} role={"dialog"} aria-labelledby={"editBookModal"} aria-hidden={"true"}>
+				  							<div className={"modal-dialog modal-dialog-centered"} role={"document"}>
+				    							<div className={"modal-content"}>
+					      							<div className={"modal-header"}>
+					       								<h5 className={"modal-title"} id={"modalTitle"}>Edit Book Details</h5>
+					        							<button type={"button"} className={"close"} data-dismiss={"modal"} aria-label={"Close"}>
+					          								<span aria-hidden={"true"}>&times;</span>
+					        							</button>
+					      							</div>
+					      							<div class="modal-body">
+					      								<form method={'POST'} action={'/books/'+this.props.book.id+'/edit?_method=PUT'}>
+														  <div className={"form-group"}>
+														    <label for={"book_title_edit"}>Book Title</label>
+														    <input type={"text"} className={"form-control"} id={"book_title_edit"} placeholder={"Book Title"} name={'book_title'} defaultValue={this.props.book.book_title} />
+														  </div>
+														  <div className={"form-group"}>
+														    <label for={"book_author_edit"}>Book Author</label>
+														    <input type={"text"} className={"form-control"} id={"book_author_edit"} placeholder={"Book Author"} name={'book_author'} defaultValue={this.props.book.book_author} />
+														  </div>
+														  <div className={"form-group"}>
+														    <label for={"book_image_edit"}>Book Image</label>
+														    <input type={"text"} className={"form-control"} id={"book_author_image"} placeholder={"Book Image"} name={'book_image'} defaultValue={this.props.book.book_image} />
+														  </div>
+														  <div className={"form-group"}>
+														    <label for={"book_synopsis_edit"}>Book Synopsis</label>
+					                        				<textarea className={"form-control"} id={"book_synopsis"} placeholder={'Book Synopsis'} rows={'5'} name={'book_synopsis'} defaultValue={this.props.book.book_synopsis}></textarea>
+														  </div>
+														  <div class="modal-footer">
+				        									<button type={"button"} class={"btn btn-light"} data-dismiss={"modal"}>Close</button>
+				        									<button type={"submit"} id={'confirmEdit'} class={"btn btn-dark"}>Edit</button>
+												    	  </div>
+														</form>
+													</div>
+				    							</div>
+				  							</div>
+										</div>
+									</div>
+								    <div id={'ownerhistory'}>
 				    					<h2>Owner History</h2>
 					    				<table class="table">
 										  	<thead>
@@ -64,15 +96,43 @@ class Individualbook extends React.Component {
 					    				</table>
 				    				</div>
 					    		</div>
-					    		<div className={'col-4 offset-1'}>
-
+					    		<div className={'col-4'} id ={'individualBookDescription'}>
+						    		<h1> Title: {this.props.book.book_title}</h1>
+						    		<h3> Author: {this.props.book.book_author}</h3>
 					    			<div id = {'booksynopsis'}>
 					    				<h2>Synopsis</h2>
 					    				<p>{this.props.book.book_synopsis}</p>
 					    			</div>
 
 					    			<div id = {'bookreviews'}>
-					    				<h2>Reviews</h2>
+					    				<div id= {'review-header'}>
+					    					<h2 id={'left'}>Reviews</h2>
+					    					<button type={"button"} id={'editbook'} className={"btn btn-dark mb-2 rightFloat"} data-toggle={"modal"} data-target={"#addBookReviewModal"}> Add Review </button>
+   					  						<div style={{clear: 'both'}}></div>
+					    				</div>
+					    				<div className={"modal fade"} id={"addBookReviewModal"} tabindex={"-1"} role={"dialog"} aria-labelledby={"addBookReviewModal"} aria-hidden={"true"}>
+				  							<div className={"modal-dialog modal-dialog-centered"} role={"document"}>
+				    							<div className={"modal-content"}>
+					      							<div className={"modal-header"}>
+					       								<h5 className={"modal-title"} id={"modalTitle"}>Add Book Review</h5>
+					        							<button type={"button"} className={"close"} data-dismiss={"modal"} aria-label={"Close"}>
+					          								<span aria-hidden={"true"}>&times;</span>
+					        							</button>
+					      							</div>
+					      							<div class="modal-body">
+					      								<form method={'POST'} action={'/books/'+this.props.book.id+'/addreview'}>
+														  <div className={"form-group"}>
+					                        				<textarea className={"form-control"} id={"book_review"} placeholder={'Book Review'} rows={'5'} name={'book_review'}></textarea>
+														  </div>
+														  <div class="modal-footer">
+				        									<button type={"button"} class={"btn btn-light"} data-dismiss={"modal"}>Close</button>
+				        									<button type={"submit"} id={'confirmAddReview'} class={"btn btn-dark"}>Add</button>
+												    	  </div>
+														</form>
+													</div>
+				    							</div>
+				  							</div>
+										</div>
 					    				{reviews}
 					    			</div>
 				    			</div>
@@ -90,22 +150,16 @@ class Individualbook extends React.Component {
 					</HEAD>
 					<BODY>
 						<NAVBAR username={this.props.username} />
-						<div className = {'container-fluid mt-5 sub-nav'}>
-							<form method={'POST'} action={'/books/'+this.props.book.id+'/request'}>
-								<button type={'submit'}>Request</button>
-							</form>
-						</div>
-						<div className = {'container-fluid mt-4'} >
+						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
-				    			<div className={'col-2 offset-2'}>
-				    				<div className={"card"}>
-	        							<img src = {this.props.book.book_image} className={'card-book-img'} />
-								        <div className={"card-body"}>
-								          <h5 className={'card-link card-title'}>{this.props.book.book_title}</h5>
-								          <p className={'card-text card-link'} id={'card-author'}>{this.props.book.book_author}</p>
-								        </div>
-								    </div>
-				    				<div id={'ownerhistory'}>
+				    			<div className={'col-2 offset-3'}>
+	        						<img src = {this.props.book.book_image} id={'individualBookImage'} />
+								    <div className = {'mt-3'} id ={'individualBookButtons'}>
+										<form method={'POST'} action={'/books/'+this.props.book.id+'/request'}>
+											<button className={'btn btn-dark'} type={'submit'}>Request</button>
+										</form>
+									</div>
+								    <div id={'ownerhistory'}>
 				    					<h2>Owner History</h2>
 					    				<table class="table">
 										  	<thead>
@@ -121,8 +175,9 @@ class Individualbook extends React.Component {
 					    				</table>
 				    				</div>
 					    		</div>
-					    		<div className={'col-4 offset-1'}>
-
+					    		<div className={'col-4'} id ={'individualBookDescription'}>
+						    		<h1> Title: {this.props.book.book_title}</h1>
+						    		<h3> Author: {this.props.book.book_author}</h3>
 					    			<div id = {'booksynopsis'}>
 					    				<h2>Synopsis</h2>
 					    				<p>{this.props.book.book_synopsis}</p>

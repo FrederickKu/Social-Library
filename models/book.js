@@ -108,6 +108,58 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
+  let addBook =(callback,bookDetails,username) =>{
+    let queryString = "SELECT id FROm users WHERE username =$1";
+    let values =  [username];
+
+    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+      if (error){
+        console.log(error);
+        callback(error,null);
+      } else {
+        var userID = queryResult.rows[0].id;
+        let queryString = "INSERT into books (book_title,book_author,book_synopsis,book_image,user_id,book_status) VALUES ($1,$2,$3,$4,$5,'available') RETURNING id";
+        let values = [bookDetails.book_title,bookDetails.book_author,bookDetails.book_synopsis,bookDetails.book_image,userID];
+
+        dbPoolInstance.query(queryString,values, (error,queryResult)=>{
+          if (error){
+            console.log(error);
+            callback(error,null);
+          } else {
+            var bookID = queryResult.rows[0].id
+            let queryString ="INSERT into book_ownerhistory (user_id, book_id) VALUES ($1,$2)";
+            let values = [userID,bookID];
+
+            dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+              if(error){
+                console.log(error);
+                callback(error,null);
+              } else {
+                callback (null,bookID)
+              }
+            })
+          }
+        })
+
+      }
+    })
+  }
+
+  let addReview = (callback,review,id,username) => {
+    let queryString = "INSERT INTO bookreviews (user_id,book_id,book_review) VALUES ((SELECT id FROM users WHERE username = $1), $2, $3)";
+    let values = [username,id,review];
+  
+    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+      if(error){
+        console.log(error);
+        callback(error,null);
+      } else{
+        callback(null,id);
+      }
+    })
+  } 
+
+
 
   let deleteIndividualBook = (callback,id) => {
     // let queryString = "SELECT username FROM (SELECT id AS user_id , username FROM users) AS username INNER JOIN books ON (books.user_id = username.user_id) WHERE books.id = $1";
@@ -129,7 +181,9 @@ module.exports = (dbPoolInstance) => {
     searchAllBooks,
     getIndividualBook,
     doEdit,
-    deleteIndividualBook
+    deleteIndividualBook,
+    addBook,
+    addReview
   };
 
 };

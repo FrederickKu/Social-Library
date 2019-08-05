@@ -17,7 +17,7 @@ class requestPage extends React.Component {
 			    	</HEAD>
 			    	<BODY>
 			    		<NAVBAR username={this.props.username} />
-			    		<div className = {'container'} >
+			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-6'}>
 				    				<PROFILECARD name={this.props.ownerDetail.user_name} photo={this.props.ownerDetail.user_photo} />
