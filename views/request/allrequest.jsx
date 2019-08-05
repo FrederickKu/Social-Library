@@ -22,7 +22,7 @@ class Allrequest extends React.Component {
 	  							</form><br /> 
 	  							<form method={'POST'} action={'/request/'+this.props.userDetails.username+'/reject?_method=PUT'}>
 	  								<input type={"hidden"} name={"request"} defaultValue={request.id} />
-	  								<button className={'btn btn-danger'} type={'submit'}>Reject Request</button>
+	  								<button className={'btn btn-warning'} type={'submit'}>Reject Request</button>
 	  							</form>
 	  						</td>
 						</tr>
@@ -78,7 +78,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>
 							<form method={'POST'} action={'/request/'+this.props.userDetails.username+'/reject?_method=PUT'}>
 	  								<input type={"hidden"} name={"request"} defaultValue={request.id} />
-	  								<button className={'btn btn-danger'} type={'submit'}>Cancel Request</button>
+	  								<button className={'btn btn-warning'} type={'submit'}>Cancel Request</button>
 	  						</form>
 							</td>
 						</tr>

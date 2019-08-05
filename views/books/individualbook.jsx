@@ -106,7 +106,7 @@ class Individualbook extends React.Component {
 
 					    			<div id = {'bookreviews'}>
 					    				<div id= {'review-header'}>
-					    					<h2 id={'left'}>Reviews</h2>
+					    					<h3 id={'left'}>Reviews</h3>
 					    					<button type={"button"} id={'editbook'} className={"btn btn-dark mb-2 rightFloat"} data-toggle={"modal"} data-target={"#addBookReviewModal"}> Add Review </button>
    					  						<div style={{clear: 'both'}}></div>
 					    				</div>
@@ -179,7 +179,7 @@ class Individualbook extends React.Component {
 						    		<h1> Title: {this.props.book.book_title}</h1>
 						    		<h3> Author: {this.props.book.book_author}</h3>
 					    			<div id = {'booksynopsis'}>
-					    				<h2>Synopsis</h2>
+					    				<h3>Synopsis</h3>
 					    				<p>{this.props.book.book_synopsis}</p>
 					    			</div>
 

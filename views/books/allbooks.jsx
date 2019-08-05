@@ -29,9 +29,9 @@ class Allbooks extends React.Component {
 	            			</form>
 		    			</div>
 		    			<div id={'display-book'}>
-		    				<h3 className={'searchAllTitle'}>Search By Title </h3>
+		    				<h3 className={'searchAllTitle mb-5'}>Search By Title </h3>
 		    				{searchBooks}
-		    				<h3 className={'searchAllTitle'}>Search By Author </h3>
+		    				<h3 className={'searchAllTitle my-5'}>Search By Author </h3>
 		    				{searchAuthor}
 		    			</div>
 		    		</div>

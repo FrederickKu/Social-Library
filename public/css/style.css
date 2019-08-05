@@ -13,11 +13,11 @@ nav {
 }
 
 #navbarLogo {
-	width: 4vw ;
+	width: 3.5vw ;
 }
 
 .nav-link {
-	font-size: 1.8rem;
+	font-size: 1.6rem;
 	color: black;
 }
 #profilecontainer {
@@ -28,11 +28,11 @@ nav {
 }
 #profileimagecontainer {
 	display: inline-block;
-	width:4vw;
+	width:3.5vw;
 }
 
 #profiletext {
-	font-size:1.2rem;
+	font-size:1rem;
 	margin:0;
 }
 
@@ -42,7 +42,7 @@ nav {
 }
 
 .dropdown-item{
-	font-size:1.3rem;
+	font-size:1.2rem;
 }
 
 .dropdown-toggle::after {
@@ -68,13 +68,18 @@ BookCard Styling
 	text-decoration: underline;
 }
 
+.card{
+	width: 25rem;
+	height: 15rem;
+	margin-bottom: 2rem;
+	box-shadow: 5px 5px 4px grey;
+}
+
 .bookcard {
 	display: flex;
 	flex-wrap: wrap;
-	width: 35rem;
-	height: 20rem;
-	margin-bottom: 2rem;
-	box-shadow: 5px 5px 4px grey;
+	justify-content: center;
+	align-content: center;
 }
 
 .bookcard img {
@@ -83,16 +88,17 @@ BookCard Styling
 	margin: 0 5%;
 }
 
-.bookcard-link::hover{
+#bookcard-link:hover{
 	text-decoration:none;
 }
+
 .card-body {
 	color: black;
 	width: 48%;
 	display: inline-block;
 }
 .card-body >h5{
-	font-size:1.7rem;
+	font-size:1.5rem;
 	margin-bottom: 0;
 }
 
@@ -115,23 +121,23 @@ The Exchange Page (ALl Book)
 #display-book{
 	display:flex;
 	flex-wrap: wrap;
-	justify-content: space-around;	
+	justify-content: center;	
 	align-content: center;
 	padding-right:100px;
 	padding-left: 100px;
 }
 
 .search-bar{
-	margin: 3rem auto;
+	margin: 2rem auto 1rem;
     padding: 0 141px;
     border-radius: 10px;
 }
 
 #allbook-search{
 	border-style: none;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	border-radius: 50px;
-	padding: 40px;
+	padding: 20px;
 }
 
 .searchAllTitle {
@@ -159,6 +165,10 @@ Profile Card
 
 .profile-card-body {
 	margin: 0 auto;
+}
+
+.profile-card-body>h5{
+	font-size: 1.3rem;
 }
 
 /*
@@ -193,12 +203,12 @@ Individual Book Page
 	margin-bottom: 5%;
 }
 
-#booksynopsis>h2{
+#booksynopsis>h3{
 	font-weight: bold;
 	margin-bottom: 2%
 }
 #booksynopsis>p{
-	font-size:1.2rem;
+	font-size:1rem;
 }
 
 #bookreviews>h2{
@@ -213,7 +223,7 @@ Individual Book Page
 }
 
 .reviews>p{
-	font-size:1.2rem;
+	font-size:1rem;
 	font-style: italic;
 }
 
@@ -307,8 +317,9 @@ Individual Request Page
 	box-shadow: 0px 5px 4px grey;
 }
 
-#request-book-div>h1{
+#request-book-div>h3{
 	text-align: center;
+	font-weight: bold;
 }
 
 #request-book-div>img{

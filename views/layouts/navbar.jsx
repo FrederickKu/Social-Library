@@ -11,7 +11,7 @@ class Navbar extends React.Component {
           <div className={"collapse navbar-collapse"} id={"mainNavbar"}>
             <div className={"nav navbar-nav mx-auto"} id = {'centernav'}>
                 <div className={"nav-item dropdown"}>
-                  <a className={"nav-link dropdown-toggle"} href={"#"} role={"button"} data-toggle={"dropdown"} aria-haspopup="true" aria-expanded="false">Profile</a>
+                  <a className={"nav-link dropdown-toggle active"} href={"#"} role={"button"} data-toggle={"dropdown"} aria-haspopup="true" aria-expanded="false">Profile</a>
                   <div className={"dropdown-menu"} aria-labelledby={"navbarDropdown"}>
                     <a className={"dropdown-item"} href={'/home/'+this.props.username}>My Profile</a>
                     <a class="dropdown-item" href={'/books/add'}>Add Book</a>

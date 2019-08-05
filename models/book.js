@@ -57,7 +57,7 @@ module.exports = (dbPoolInstance) => {
             data.byAuthor = result;
 
             let queryString="SELECT id, username, user_name, user_photo FROM users WHERE username = $1";
-            let values = [username]
+            let values = [username];
 
             dbPoolInstance.query(queryString, values, (error,queryResult)=>{
               if(error){
@@ -65,7 +65,7 @@ module.exports = (dbPoolInstance) => {
                 callback(error,null);
               } else {
                 data.userDetails = queryResult.rows[0];
-                callback(error,null);
+                callback(null,data);
               }
             });          
           }
@@ -96,7 +96,7 @@ module.exports = (dbPoolInstance) => {
             } else {
               data.ownerHistory = queryResult.rows;
 
-              let queryString = "SELECT * FROM (SELECT id AS user_id, username FROM users) AS u INNER JOIN bookreviews ON (u.user_id = bookreviews.user_id) WHERE bookreviews.book_id = $1";
+              let queryString = "SELECT * FROM (SELECT id AS user_id, username FROM users) AS u INNER JOIN bookreviews ON (u.user_id = bookreviews.user_id) WHERE bookreviews.book_id = $1 ORDER BY review_date DESC";
               let values = [id];
 
               dbPoolInstance.query(queryString,values,(error,queryResult)=>{

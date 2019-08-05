@@ -40,12 +40,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -93,12 +93,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -149,12 +149,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -207,12 +207,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -268,12 +268,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -330,12 +330,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -392,12 +392,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>
@@ -453,12 +453,12 @@ class RequestPage extends React.Component {
 								        </div>
 			    					</div>
 			    					<div className={"my-4 p-4"} id={'request-book-div'}>
-			    						<h1> Book Details</h1>
+			    						<h3> Book Details</h3>
 			    						<img src = {this.props.requestBookDetail.book_image} />
 			    						<div id={'request-book-header'}>
-			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
-			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
-			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    							<h3> Title:{this.props.requestBookDetail.book_title}</h3>
+			    							<h4 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h4>
+			    							<h4 className={'mt-3'}> Book Synopsis </h4>
 			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
 			    						</div>
 				  						<div style={{clear: 'both'}}></div>

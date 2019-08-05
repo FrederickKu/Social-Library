@@ -31,7 +31,8 @@ module.exports = (db) => {
                 response.render('books/allbooks',data);
               }
             }
-            db.books.searchAllBooks(callback,request.query.search)
+
+            db.books.searchAllBooks(callback,request.query.search,request.cookies.woof)
           } else {
             let callback = function(error, allBooks, userDetails){
               if (error){
