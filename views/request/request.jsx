@@ -5,32 +5,108 @@ var NAVBAR = require('../layouts/navbar.jsx');
 var BOOKCARD = require('../components/bookCard.jsx');
 var PROFILECARD = require('../components/profileCard.jsx');
 
-class requestPage extends React.Component {
+class RequestPage extends React.Component {
   render() {
-  		if (this.props.requestBookDetail.owner_handshake && this.props.requestBookDetail.recipient_handshake){
+  		  if (this.props.requestBookDetail.swap_status==='cancelled'){
+  			//cancelled
+  			return (
+		    	<html>
+			    	<HEAD>
+			    		<title>Social Library: Request #{this.props.requestid} </title>
+			    		<link rel={"stylesheet"} href={`/css/style.css`} />
+			    	</HEAD>
+			    	<BODY>
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
+			    			<div className={'row'}>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+				    					<button className={'btn btn-danger'} disabled> Swap Cancelled </button>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    						
+			    					</div>
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
+			    				</div>
+			    			</div>
+			    		</div>
+			    	</BODY>
+		        </html>   
+    		);
+  		} else if (this.props.requestBookDetail.owner_handshake && this.props.requestBookDetail.recipient_handshake){
   			//This is when both confirm swap
   			return (
 		    	<html>
 			    	<HEAD>
-			    		<title>Social Library: The Exchange </title>
+			    		<title>Social Library: Request #{this.props.requestid} </title>
 			    		<link rel={"stylesheet"} href={`/css/style.css`} />
 			    	</HEAD>
 			    	<BODY>
-			    		<NAVBAR username={this.props.username} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
-				    			<div className={'col-6'}>
-				    				<PROFILECARD name={this.props.ownerDetail.user_name} photo={this.props.ownerDetail.user_photo} />
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+				    					<button className={'btn btn-success'} disabled> Swap Completed </button>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    						
+			    					</div>
 				    			</div>
-				    			<div className={'col-6'}>	
-			    					<PROFILECARD name={this.props.recipientDetails.user_name} photo={this.props.recipientDetails.user_photo} />
-			    				</div>
-			    				<div className = {'col-4'}>
-			    					<p> book DIV HERE </p>
-			    					<p> Approved HURRAY</p>
-			    				</div>
-			    				<div  className={'col-8'}>
-			    					<p> CHAT BOX HERE </p>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
 			    				</div>
 			    			</div>
 			    		</div>
@@ -39,94 +115,361 @@ class requestPage extends React.Component {
     		);
 
   		} else if (this.props.requestBookDetail.owner_handshake && this.props.username === this.props.ownerDetail.username){
-  			//This is when owner has approved and is owner 
+  			//This is when owner has approved and recipient have not
   			return (
 		    	<html>
 			    	<HEAD>
 			    		<title>Social Library: The Exchange </title>
 			    		<link rel={"stylesheet"} href={`/css/style.css`} />
 			    	</HEAD>
-			    	<BODY>
-			    		<NAVBAR username={this.props.username} />
-			    		<div className = {'container'} >
-			    			<div className={'row'}>
-				    			<div className={'col-6'}>
-				    				<PROFILECARD name={this.props.ownerDetail.user_name} photo={this.props.ownerDetail.user_photo} />
-				    			</div>
-				    			<div className={'col-6'}>	
-			    					<PROFILECARD name={this.props.recipientDetails.user_name} photo={this.props.recipientDetails.user_photo} />
-			    				</div>
-			    				<div className = {'col-4'}>
-			    					<p> book DIV HERE </p>
-			    					<p> Approved</p>
-			    				</div>
-			    				<div  className={'col-8'}>
-			    					<p> CHAT BOX HERE </p>
-			    				</div>
-			    			</div>
-			    		</div>
-			    	</BODY>
-		        </html>   
-    		);
 
-  		} else if (this.props.requestBookDetail.recipient_handshake && this.props.username === this.props.recipientDetails.username){
-  			//this is when recipient has approved and is recipient
-  			return (
-		    	<html>
-			    	<HEAD>
-			    		<title>Social Library: The Exchange </title>
-			    		<link rel={"stylesheet"} href={`/css/style.css`} />
-			    	</HEAD>
 			    	<BODY>
-			    		<NAVBAR username={this.props.username} />
-			    		<div className = {'container'} >
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
-				    			<div className={'col-6'}>
-				    				<PROFILECARD name={this.props.ownerDetail.user_name} photo={this.props.ownerDetail.user_photo} />
-				    			</div>
-				    			<div className={'col-6'}>	
-			    					<PROFILECARD name={this.props.recipientDetails.user_name} photo={this.props.recipientDetails.user_photo} />
-			    				</div>
-			    				<div className = {'col-4'}>
-			    					<p> book DIV HERE </p>
-			    					<p> Approved</p>
-			    				</div>
-			    				<div  className={'col-8'}>
-			    					<p> CHAT BOX HERE </p>
-			    				</div>
-			    			</div>
-			    		</div>
-			    	</BODY>
-		        </html>   
-    		);
-
-  		} else {
-  			//covers all other situation
-  			return (
-		    	<html>
-			    	<HEAD>
-			    		<title>Social Library: The Exchange </title>
-			    		<link rel={"stylesheet"} href={`/css/style.css`} />
-			    	</HEAD>
-			    	<BODY>
-			    		<NAVBAR username={this.props.username} />
-			    		<div className = {'container'} >
-			    			<div className={'row'}>
-				    			<div className={'col-6'}>
-				    				<PROFILECARD name={this.props.ownerDetail.user_name} photo={this.props.ownerDetail.user_photo} />
-				    			</div>
-				    			<div className={'col-6'}>	
-			    					<PROFILECARD name={this.props.recipientDetails.user_name} photo={this.props.recipientDetails.user_photo} />
-			    				</div>
-			    				<div className = {'col-4'}>
-			    					<p> book DIV HERE </p>
-			    					<form method={'POST'} action={'/request/'+this.props.username+'/'+this.props.requestid+'/confirm?_method=PUT'}>
-		  								<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
-		  								<button type={'submit'}>Confirm Swap</button>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+		  								<button className={'btn btn-success'} disabled>Confirmed Swap</button>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+	  									<button className={'btn btn-light'} disabled>Awaiting Confirmation</button>
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    					</div>
+			    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+		  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+		  									<button className={'btn btn-danger btn-lg'} type={'submit'}>Cancel Swap</button>
 		  							</form>
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
 			    				</div>
-			    				<div  className={'col-8'}>
-			    					<p> CHAT BOX HERE </p>
+			    			</div>
+			    		</div>
+			    	</BODY>
+		        </html>   
+    		);
+  		} else if (this.props.requestBookDetail.recipient_handshake && this.props.username === this.props.recipientDetails.username){
+  			//this is when recipient has approved and  owner have not 
+  			return (
+		    	<html>
+			    	<HEAD>
+			    		<title>Social Library: The Exchange </title>
+			    		<link rel={"stylesheet"} href={`/css/style.css`} />
+			    	</HEAD>
+
+			    	<BODY>
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
+			    			<div className={'row'}>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+	  									<button className={'btn btn-light'} disabled>Awaiting Confirmation</button>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+		  								<button className={'btn btn-success'} disabled>Confirmed Swap</button>
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    					</div>
+			    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+		  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+		  									<button className={'btn btn-danger btn-lg'} type={'submit'}>Cancel Swap</button>
+		  							</form>
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
+			    				</div>
+			    			</div>
+			    		</div>
+			    	</BODY>
+		        </html>   
+    		);
+  		} else if (this.props.requestBookDetail.recipient_handshake && this.props.username === this.props.ownerDetail.username){
+  			//this is when recipient has approved and owner have not
+  			return (
+		    	<html>
+			    	<HEAD>
+			    		<title>Social Library: The Exchange </title>
+			    		<link rel={"stylesheet"} href={`/css/style.css`} />
+			    	</HEAD>
+
+			    	<BODY>
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
+			    			<div className={'row'}>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+				    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/'+this.props.requestid+'/confirm?_method=PUT'}>
+		  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+		  									<button className={'btn btn-dark'} type={'submit'}>Confirm Swap</button>
+		  								</form>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+		  								<button className={'btn btn-success'} disabled>Confirmed Swap</button>		  						
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    					</div>
+		    						<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+	  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+	  									<button className={'btn btn-danger btn-lg'} type={'submit'}>Cancel Swap</button>
+	  								</form>			    						
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
+			    				</div>
+
+			    			</div>
+			    		</div>
+			    	</BODY>
+		        </html>   
+    		);
+  		} else if (this.props.requestBookDetail.owner_handshake && this.props.username === this.props.recipientDetails.username){
+  			//this is when owner has approved and is recipient have not
+  			return (
+		    	<html>
+			    	<HEAD>
+			    		<title>Social Library: The Exchange </title>
+			    		<link rel={"stylesheet"} href={`/css/style.css`} />
+			    	</HEAD>
+
+			    	<BODY>
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
+			    			<div className={'row'}>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+		  								<button className={'btn btn-success'} disabled>Confirmed Swap</button>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+		  								<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/'+this.props.requestid+'/confirm?_method=PUT'}>
+		  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+		  									<button className={'btn btn-dark'} type={'submit'}>Confirm Swap</button>
+		  								</form>
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    					</div>
+			    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+	  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+	  									<button className={'btn btn-danger btn-lg'} type={'submit'}>Cancel Swap</button>
+	  								</form>
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
+			    				</div>
+			    			</div>
+			    		</div>
+			    	</BODY>
+		        </html>   
+    		);
+  		} else if (this.props.username === this.props.ownerDetail.username) {
+  			//owner but not yet accept
+  			return (
+		    	<html>
+			    	<HEAD>
+			    		<title>Social Library: The Exchange </title>
+			    		<link rel={"stylesheet"} href={`/css/style.css`} />
+			    	</HEAD>
+
+			    	<BODY>
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
+			    			<div className={'row'}>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+				    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/'+this.props.requestid+'/confirm?_method=PUT'}>
+		  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+		  									<button className={'btn btn-dark'} type={'submit'}>Confirm Swap</button>
+		  								</form>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+	  									<button className={'btn btn-light'} disabled>Awaiting Confirmation</button>
+
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    					</div>
+			    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+	  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+	  									<button className={'btn btn-danger btn-lg'} type={'submit'}>Cancel Swap</button>
+	  								</form>
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
+			    				</div>
+			    			</div>
+			    		</div>
+			    	</BODY>
+		        </html>   
+    		);
+  		} else if (this.props.username === this.props.recipientDetails.username) {
+  			//recipient but not yet accept
+  			 return (
+		    	<html>
+			    	<HEAD>
+			    		<title>Social Library: The Exchange </title>
+			    		<link rel={"stylesheet"} href={`/css/style.css`} />
+			    	</HEAD>
+
+			    	<BODY>
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<div className = {'container-fluid'} >
+			    			<div className={'row'}>
+				    			<div className={'col-4 offset-1 request-details mt-5'}>
+				    				<div className={'p-2'} id={'request-owner-details'}> 
+				    					<h3> Owner </h3>
+				    					<img src = {this.props.ownerDetail.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.ownerDetail.username}</h5>
+								        </div>
+				    				</div>
+				    				<div id={'swap-confirmation'}>
+				    					<p className={'m-0'} id={'owner-arrow'} ><span>⇜</span>owner</p>
+				    						<button className={'btn btn-light'} disabled>Awaiting Confirmation</button>
+		  								<p className={'m-0'} id={'recipient-arrow'}>recipient<span>⇝</span></p>
+		  								<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/'+this.props.requestid+'/confirm?_method=PUT'}>
+		  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+		  									<button className={'btn btn-dark'} type={'submit'}>Confirm Swap</button>
+		  								</form>
+				    				</div>
+				    				<div className={'p-2'} id={'request-recipient-details'}>
+				    					<h3> Recipient</h3>
+				    					<img src = {this.props.recipientDetails.user_photo} />
+								        <div className={"detail-text mt-3"}>
+								          <h5>{this.props.recipientDetails.username}</h5>
+								        </div>
+			    					</div>
+			    					<div className={"my-4 p-4"} id={'request-book-div'}>
+			    						<h1> Book Details</h1>
+			    						<img src = {this.props.requestBookDetail.book_image} />
+			    						<div id={'request-book-header'}>
+			    							<h1> Title:{this.props.requestBookDetail.book_title}</h1>
+			    							<h2 className={'mt-3'}>Author: {this.props.requestBookDetail.book_author}</h2>
+			    							<h3 className={'mt-3'}> Book Synopsis </h3>
+			    						<p> {this.props.requestBookDetail.book_synopsis} </p>
+			    						</div>
+				  						<div style={{clear: 'both'}}></div>
+			    					</div>
+			    					<form className={'mb-3'} method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+	  									<input type={"hidden"} name={"request"} defaultValue={this.props.requestid} />
+	  									<button className={'btn btn-danger btn-lg'} type={'submit'}>Cancel Swap</button>
+	  								</form>
+				    			</div>
+				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
+			    					<p> Chat Feature Coming Soon! </p>
 			    				</div>
 			    			</div>
 			    		</div>
@@ -134,8 +477,7 @@ class requestPage extends React.Component {
 		        </html>   
     		);
   		}
-	  	
 	}
   }
 
-module.exports = requestPage;
+module.exports = RequestPage;

@@ -1,7 +1,3 @@
-const sha256=require('js-sha256');
-const PSALT = 'sErceT pAsSwoRd adDiTioNaL pHraSe';
-
-
 /**
  * ===========================================
  * Export model functions as a module
@@ -10,20 +6,32 @@ const PSALT = 'sErceT pAsSwoRd adDiTioNaL pHraSe';
 module.exports = (dbPoolInstance) => {
 
   //getAllBooks
-  let getAllBooks = (callback) => {
+  let getAllBooks = (callback,username) => {
     let queryString = "SELECT * FROM (SELECT id AS user_id , username FROM users) AS username INNER JOIN books ON (books.user_id = username.user_id)";
-    console.log(queryString);
     dbPoolInstance.query(queryString, (error,queryResult)=> {
       if (error) {
         console.log(error);
-        callback(error,null);
+        callback(error,null,null);
       } else {
-        callback(0,queryResult.rows);
+        var books = queryResult.rows;
+
+        let queryString="SELECT id, username, user_name, user_photo FROM users WHERE username = $1";
+        let values = [username]
+
+        dbPoolInstance.query(queryString, values, (error,queryResult)=>{
+          if (error){
+            console.log(error);
+            callback(error,null,null);
+          } else {
+            var userDetails = queryResult.rows[0];
+            callback(0,books,userDetails)
+          }
+        });
       }
     });
   };
 
-  let searchAllBooks = (callback, query) =>{
+  let searchAllBooks = (callback, query,username) =>{
     let queryString = "SELECT * FROM (SELECT id AS user_id , username FROM users) AS username INNER JOIN books ON (books.user_id = username.user_id) WHERE books.book_title ILIKE $1";
     let values =['%'+query+'%'];
 
@@ -47,14 +55,26 @@ module.exports = (dbPoolInstance) => {
           } else {
             let result=(queryResult.rows.length>0) ? queryResult.rows : [];
             data.byAuthor = result;
-            callback(null,data);
+
+            let queryString="SELECT id, username, user_name, user_photo FROM users WHERE username = $1";
+            let values = [username]
+
+            dbPoolInstance.query(queryString, values, (error,queryResult)=>{
+              if(error){
+                console.log(error);
+                callback(error,null);
+              } else {
+                data.userDetails = queryResult.rows[0];
+                callback(error,null);
+              }
+            });          
           }
-        })
+        });
       }
     })
   };
 
-  let getIndividualBook = (callback,id)=> {
+  let getIndividualBook = (callback,id,username)=> {
     let queryString = "SELECT * FROM (SELECT id AS user_id , username FROM users) AS username INNER JOIN books ON (books.user_id = username.user_id) WHERE books.id = $1";
     let values=[id];
 
@@ -85,13 +105,25 @@ module.exports = (dbPoolInstance) => {
                   callback(error,null);
                 } else {
                   data.bookReviews = queryResult.rows;
-                  callback(null,data);
+
+                  let queryString="SELECT id, username, user_name, user_photo FROM users WHERE username = $1";
+                  let values = [username]
+
+                  dbPoolInstance.query(queryString, values, (error,queryResult)=> { 
+                    if (error){
+                      console.log(error);
+                      callback(error,null);
+                    } else {
+                      data.userDetails = queryResult.rows[0];
+                      callback(null,data);
+                    }
+                  });
                 }
               });
             }
-          })
-        }
-    })
+        });
+      }
+    });
   }
 
   let doEdit =(callback,editDetails,id) => {
@@ -108,8 +140,22 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
+  let getUserDetails = (callback,username) =>{
+    let queryString="SELECT id, username, user_name, user_photo FROM users WHERE username = $1";
+    let values = [username]
+
+    dbPoolInstance.query(queryString, values, (error,queryResult)=>{
+      if(error) {
+        console.log(error);
+        callback(error,null);
+      } else {
+        callback(null,queryResult.rows[0]);
+      }
+    });
+  }
+
   let addBook =(callback,bookDetails,username) =>{
-    let queryString = "SELECT id FROm users WHERE username =$1";
+    let queryString = "SELECT id FROM users WHERE username =$1";
     let values =  [username];
 
     dbPoolInstance.query(queryString,values,(error,queryResult)=>{
@@ -183,7 +229,8 @@ module.exports = (dbPoolInstance) => {
     doEdit,
     deleteIndividualBook,
     addBook,
-    addReview
+    addReview, 
+    getUserDetails
   };
 
 };

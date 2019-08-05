@@ -9,9 +9,7 @@ var PROFILECARD = require('../components/profileCard.jsx');
 
 class Home extends React.Component {
   render() {
-
   	if (this.props.searchStatus){
-
   		var searchBooks = this.props.byTitle.map(book => {
   			return <BOOKCARD book={book} />
   		});
@@ -26,7 +24,7 @@ class Home extends React.Component {
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR username={this.props.username} name={this.props.name} photo={this.props.photo}/>
+		    		<NAVBAR name={this.props.name} username={this.props.username} photo={this.props.photo}/>
 		    		<div className={'container-fluid'}>
 		    			<div className={'row'}>
 		    				<div className={'col-2 offset-2'}>
@@ -71,7 +69,7 @@ class Home extends React.Component {
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR username={this.props.username}/>
+		    		<NAVBAR name={this.props.name} username={this.props.username} photo={this.props.photo}/>
 		    		<div className={'container-fluid'}>
 		    			<div className={'row'}>
 			    			<div className={'col-2 offset-2'}>

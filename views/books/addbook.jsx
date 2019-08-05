@@ -9,11 +9,11 @@ class Addbook extends React.Component {
 			return (
 				<html>
 					<HEAD>
-						<title>Social Library: The Exchange </title>
+						<title>Social Library: Add Book </title>
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.username} />
+						<NAVBAR username={this.props.username} name={this.props.user_name} photo={this.props.user_photo} />
 						<div className = {'container'} >
 							<div className={'row'}>
 				    			<div className={'col-10 offset-1 addForm mt-5'}>

@@ -1,59 +1,85 @@
+const sha256=require('js-sha256');
+const SALT = 'ThIs is ThE SecrEt pHrasE.';
+
 module.exports = (db) => {
 
   /**
    * ===========================================
-   * Login Controllers
+   * Book Controllers
    * ===========================================
    */
 
-  let getAllBooks = (request,response) => {
-
-    if (Object.keys(request.query).length!==0) {
-      let callback = function(error,data){
-        if (error) {
-          response.status(404);
-        } else {
-          data.searchStatus=true;
-          data.username=request.cookies.woof;
-          response.render('books/allbooks',data);
-        }
-      }
-      db.books.searchAllBooks(callback,request.query.search)
+  let checkSession=(username, session) =>{
+    let sessionCookie = sha256(`true` + SALT + username);
+    if (sessionCookie === session){
+      return true;
     } else {
-      let callback = function(error, allBooks){
-        if (error){
-          response.status(404);
-        } else {
-          let data = {
-            books:allBooks,
-            username:request.cookies.woof,
-            searchStatus:false,
+      return false;
+    }
+  }
+
+
+  let getAllBooks = (request,response) => {
+    if ('woof' in request.cookies && 'meow' in request.cookies){
+      if (checkSession(request.cookies.woof,request.cookies.meow)){
+          if (Object.keys(request.query).length!==0) {
+            let callback = function(error,data){
+              if (error) {
+                response.status(404);
+              } else {
+                data.searchStatus=true;
+                response.render('books/allbooks',data);
+              }
+            }
+            db.books.searchAllBooks(callback,request.query.search)
+          } else {
+            let callback = function(error, allBooks, userDetails){
+              if (error){
+                response.status(404);
+              } else {
+                let data = {
+                  books:allBooks,
+                  user: userDetails,
+                  searchStatus:false,
+                }
+                response.render('books/allbooks',data);
+              }
+            }
+            db.books.getAllBooks(callback,request.cookies.woof);
           }
-          response.render('books/allbooks',data);
-        }
+      } else {
+        response.redirect('/');
       }
-      db.books.getAllBooks(callback);
+    } else {
+      response.redirect('/');
     }
   }
 
 
   let getIndividualBook = (request,response) => {
-    let callback = function(error,data) {
-      if (error){
-          response.status(404);
-        } else {
-          data.username=request.cookies.woof;
-          if (data.book.username === request.cookies.woof){
-            data.ownership=true;
-          } else {
-            data.ownership=false;
-          }
+    if ('woof' in request.cookies && 'meow' in request.cookies){
+      if (checkSession(request.cookies.woof,request.cookies.meow)){
+        let callback = function(error,data) {
+          if (error){
+              response.status(404);
+            } else {
+              if (data.book.username === request.cookies.woof){
+                data.ownership=true;
+              } else {
+                data.ownership=false;
+              }
 
-          response.render('books/individualbook',data);
+              response.render('books/individualbook',data);
+            }
         }
-    }
 
-    db.books.getIndividualBook(callback,request.params.id);
+        db.books.getIndividualBook(callback,request.params.id,request.cookies.woof);
+      } else {
+        response.redirect('/');
+      }
+    } else {
+      response.redirect('/');
+    }
   }
 
   let editIndividualBook = (request,response) => {
@@ -90,10 +116,23 @@ module.exports = (db) => {
   }
 
   let displayAddPage = (request,response) => {
-    let data = {
-      username: request.cookies.woof
+
+    if ('woof' in request.cookies && 'meow' in request.cookies){
+      if (checkSession(request.cookies.woof,request.cookies.meow)){
+          let callback = (error,userDetails) => {
+            if (error) {
+              response.status(404);
+            } else {
+              response.render('books/addbook',userDetails)
+            }
+          }
+          db.books.getUserDetails(callback,request.cookies.woof);
+      } else {
+        response.redirect('/');
+      }
+    } else {
+      response.redirect('/');
     }
-    response.render('books/addbook',data)
   }
 
   let addBook = (request,response) => {

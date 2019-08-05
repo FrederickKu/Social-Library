@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS bookreviews (
 	review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-/*swap_status: pending_accept, pending_swap, closed, cancelled*/ 
+/*swap_status: pending_accept, pending_swap, completed, cancelled*/ 
 CREATE TABLE IF NOT EXISTS swap (
 	id SERIAL PRIMARY KEY,
 	owner_id INT,

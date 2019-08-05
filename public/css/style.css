@@ -49,6 +49,10 @@ nav {
     display:none !important;
 }
 
+#editAccountModal{
+	text-align: left;
+}
+
 /*
 BookCard Styling
 */
@@ -255,4 +259,100 @@ Add Book Page
 
 .addForm{
 	text-align: center;
+}
+
+/*
+Individual Request Page
+*/
+
+.request-details{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	align-items:center;
+	height: auto;
+
+}
+
+#request-owner-details,
+#request-recipient-details{
+	width: 32%;
+	display: inline-block;
+	text-align:center;
+	border: 2px solid black;
+	border-radius: 15%;
+	box-shadow: 5px 5px 4px grey;
+}
+
+#request-owner-details{
+	box-shadow: -5px 5px 4px grey;
+}
+
+#request-owner-details>img,
+#request-recipient-details>img{
+	width: 50%;
+}
+
+#swap-confirmation{
+	width: 32%;
+	text-align: center;
+}
+
+#request-book-div{
+	width: 98%;
+	border: 2px solid black;
+	border-radius:5%;
+	box-shadow: 0px 5px 4px grey;
+}
+
+#request-book-div>h1{
+	text-align: center;
+}
+
+#request-book-div>img{
+	width: 40%;
+	margin-left:4%;
+}
+
+#request-book-div>#request-book-header {
+	width: 50%;
+	float:right;
+	margin-right: 4%
+}
+
+#request-chat-box {
+	height: 80vh;
+	border: 2px solid black;
+	text-align:center;
+	padding-top: 18%;
+	font-size:3rem;
+	font-style: italic;
+}
+
+#owner-arrow,
+#recipient-arrow{
+	font-size:1.3rem;
+	font-weight: bold;
+}
+
+#owner-arrow>span,
+#recipient-arrow>span{
+	font-style: 1.8rem;
+}
+
+#successful-password{
+	display: none;
+}
+
+#incorrect-current,
+#incorrect-match{
+	display:none;
+	color: red;
+	font-size: 0.8rem;
+}
+
+#account-footer{
+	text-align:left;
 }

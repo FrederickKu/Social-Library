@@ -35,6 +35,15 @@ module.exports = (db) => {
 
   }
 
+  let checkSession=(username, session) =>{
+    let sessionCookie = sha256(`true` + SALT + username);
+    if (sessionCookie === session){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   let addUser = (request,response) => {
         let callback = function (error,success) {
           if (error){
@@ -51,34 +60,39 @@ module.exports = (db) => {
 
 
   let displayHomePage = (request,response) => {
+    if ('woof' in request.cookies && 'meow' in request.cookies){
+      if (checkSession(request.cookies.woof,request.cookies.meow)){
+            if (Object.keys(request.query).length!==0) {
+              let callback = function(error,data){
+                if (error) {
+                  response.status(404);
+                } else {
+                  data.searchStatus=true;
+                  data.querySearch = request.query.search;
+                  response.render('user/home',data);
+                }
+              }
 
-    if (Object.keys(request.query).length!==0) {
-      let callback = function(error,data){
-        if (error) {
-          response.status(404);
-        } else {
-          data.searchStatus=true;
-          data.querySearch = request.query.search;
-          console.log(data);
-
-          response.render('user/home',data);
-        }
+              db.login.getUserInfo(callback,request.params.username,request.query.search);
+            } else {
+              let callback = function(error, data){
+                if (error){
+                  response.status(404);
+                } else {
+                  data.searchStatus=false;
+                  response.render('user/home',data);
+                }
+              }
+              
+              db.login.getUserInfo(callback,request.params.username);
+            }
+      } else {
+        response.redirect('/');
       }
-
-      db.login.getUserInfo(callback,request.params.username,request.query.search);
     } else {
-      let callback = function(error, data){
-        if (error){
-          response.status(404);
-        } else {
-          data.searchStatus=false;
-          response.render('user/home',data);
-        }
-      }
-      
-      db.login.getUserInfo(callback,request.params.username);
+      response.redirect('/');
     }
-}
+  }
 
   let logout = (request,response) =>{
     response.clearCookie('meow');
@@ -88,6 +102,21 @@ module.exports = (db) => {
 
   let redirectLogin = (request,response)=>{
     response.redirect('/');
+  }
+
+  let changeSettings = (request,response)=>{
+    if (request.body.newPassword === request.body.confirmPassword){
+      let callback = (error, status) =>{
+        if (error){
+          response.send(error);
+        } else {
+          response.send(status);
+        }
+      }
+      db.login.changeSettings(callback,request.body,request.cookies.woof);
+    }else{
+      response.send('wrongmatch')
+    }
   }
 
   /**
@@ -101,7 +130,8 @@ module.exports = (db) => {
     addUser:addUser,
     home: displayHomePage,
     logout:logout,
-    redirectLogin:redirectLogin
+    redirectLogin:redirectLogin,
+    changeSettings:changeSettings
   };
 
 }

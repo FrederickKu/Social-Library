@@ -142,11 +142,41 @@ module.exports = (dbPoolInstance) => {
     }
   };
 
+  let changeSettings=(callback,settings,username)=>{
+    let queryString = "SELECT password FROM users WHERE username = $1";
+    let values = [username];
+
+    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+      if(error){
+        console.log(error);
+        callback(error,null);
+      } else {
+        let currentPasswordHash = sha256(settings.oldPassword + PSALT);
+        if (currentPasswordHash === queryResult.rows[0].password){
+          let queryString = "UPDATE users SET password = $1 WHERE username = $2";
+          let values = [currentPasswordHash,username];
+
+          dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+            if (error){
+              console.log(error);
+              callback(error,null);
+            } else {
+              callback(null,'success');
+            }
+          });
+        } else {
+          callback(null, 'wrongcurrent')
+        }
+      }
+    })
+  }
+
 
   return {
     checkLogin,
     addUser,
-    getUserInfo
+    getUserInfo,
+    changeSettings
   };
 
 };

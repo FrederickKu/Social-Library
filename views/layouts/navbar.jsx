@@ -27,13 +27,62 @@ class Navbar extends React.Component {
                 <div class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle" href="#" id="profileimagecontainer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img id={'navprofile'} src={this.props.photo} /></a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Account Settings</a>
+                    <a class="dropdown-item" id={'account-setting-link'} href="#" data-toggle={"modal"} data-target={"#editAccountModal"}>Account Settings</a>
                     <a class="dropdown-item" href={'/logout'}>Logout</a>
                   </div>
                 </div>
+                <div className={"modal fade"} id={"editAccountModal"} tabindex={"-1"} role={"dialog"} aria-labelledby={"editAccountModal"} aria-hidden={"true"}>
+                        <div className={"modal-dialog modal-dialog-centered"} role={"document"}>
+                          <div className={"modal-content"} id={'account-setting-form'}>
+                              <div className={"modal-header"}>
+                                <h5 className={"modal-title"} id={"modalTitle"}>Edit Account Settings</h5>
+                                <button type={"button"} className={"close"} data-dismiss={"modal"} aria-label={"Close"}>
+                                    <span aria-hidden={"true"}>&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p id={'incorrect-current'}>*Incorrect Current Password</p>
+                                <p id={'incorrect-match'}>*New password does not match</p>
+                                <form >
+                                  <div className={"form-group"}>
+                                    <label for={"account_current_password"}>Current Password</label>
+                                    <input type={"password"} className={"form-control"} id={"account_current_password"} placeholder={"Current Password"} name={'account_current_password'} />
+                                  </div>
+                                  <div className={"form-group"}>
+                                    <label for={"account_password"}>New Password</label>
+                                    <input type={"password"} className={"form-control"} id={"account_password"} placeholder={"New Password"} name={'account_password'} />
+                                  </div>
+                                  <div className={"form-group"}>
+                                    <label for={"account_confirm_password"}>Confirm New Password</label>
+                                    <input type={"password"} className={"form-control"} id={"account_confirm_password"} placeholder={"Confirm New Password"} name={'account_confirm_password'} />
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type={"button"} class={"btn btn-light"} data-dismiss={"modal"}>Close</button>
+                                    <button type={'button'} id={'confirmChange'} class={"btn btn-dark"}>Submit</button>
+                                  </div>
+                              </form>
+                            </div>
+                        </div>
+                        <div className={"modal-content"} id={'successful-password'}>
+                              <div className={"modal-header"}>
+                                <h5 className={"modal-title"} id={"modalTitle"}>Password Change Successful</h5>
+                                <button type={"button"} className={"close"} data-dismiss={"modal"} aria-label={"Close"}>
+                                    <span aria-hidden={"true"}>&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p> You have successfully changed your password!</p><br />
+                                <p> Re-Login to enter the portal again</p>
+                                  <div class="modal-footer account-footer">
+                                    <a href={'/logout'}><button className={'btn btn-dark'}>Logout</button></a>
+                                  </div>
+                            </div>
+                        </div>
+                      </div>
+                </div>
             </div> 
           </div>
-        </nav>
+        </nav>   
     );
   }
 }

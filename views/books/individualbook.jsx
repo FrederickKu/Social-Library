@@ -29,11 +29,11 @@ class Individualbook extends React.Component {
 			return (
 				<html>
 					<HEAD>
-						<title>Social Library: The Exchange </title>
+						<title>Social Library: {this.props.book.book_title} </title>
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.username} />
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
 						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
 				    			<div className={'col-2 offset-3'}>
@@ -54,7 +54,7 @@ class Individualbook extends React.Component {
 					      							</div>
 					      							<div class="modal-body">
 					      								<form method={'POST'} action={'/books/'+this.props.book.id+'/edit?_method=PUT'}>
-														  <div className={"form-group"}>
+														  <div className={"form-group "}>
 														    <label for={"book_title_edit"}>Book Title</label>
 														    <input type={"text"} className={"form-control"} id={"book_title_edit"} placeholder={"Book Title"} name={'book_title'} defaultValue={this.props.book.book_title} />
 														  </div>
@@ -141,15 +141,15 @@ class Individualbook extends React.Component {
 					</BODY>
 				</html>   
 			);
-		} else {
+		} else if (this.props.book.swap_status ==='available') {
 			return (
 				<html>
 					<HEAD>
-						<title>Social Library: The Exchange </title>
+						<title>Social Library: {this.props.book.book_title} </title>
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.username} />
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
 						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
 				    			<div className={'col-2 offset-3'}>
@@ -193,7 +193,56 @@ class Individualbook extends React.Component {
 					</BODY>
 				</html>   
 			);
+		} else {
+			return (
+				<html>
+					<HEAD>
+						<title>Social Library: The Exchange </title>
+						<link rel={"stylesheet"} href={`/css/style.css`} />
+					</HEAD>
+					<BODY>
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+						<div className = {'container-fluid mt-5'} >
+							<div className={'row'}>
+				    			<div className={'col-2 offset-3'}>
+	        						<img src = {this.props.book.book_image} id={'individualBookImage'} />
+								    <div className = {'mt-3'} id ={'individualBookButtons'}>
+										<button className={'btn btn-light'} disabled>Pending Swap</button>
+									</div>
+								    <div id={'ownerhistory'}>
+				    					<h2>Owner History</h2>
+					    				<table class="table">
+										  	<thead>
+											    <tr>
+											      	<th scope="col">#</th>
+											      	<th scope="col">User</th>
+											    	<th scope="col">Starting Date</th>
+												</tr>
+										  	</thead>
+										  	<tbody>
+					    						{owners}
+					    					</tbody>
+					    				</table>
+				    				</div>
+					    		</div>
+					    		<div className={'col-4'} id ={'individualBookDescription'}>
+						    		<h1> Title: {this.props.book.book_title}</h1>
+						    		<h3> Author: {this.props.book.book_author}</h3>
+					    			<div id = {'booksynopsis'}>
+					    				<h2>Synopsis</h2>
+					    				<p>{this.props.book.book_synopsis}</p>
+					    			</div>
 
+					    			<div id = {'bookreviews'}>
+					    				<h2>Reviews</h2>
+					    				{reviews}
+					    			</div>
+				    			</div>
+					    	</div>
+						</div>
+					</BODY>
+				</html>   
+			);
 		}
 	}
   }

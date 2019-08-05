@@ -22,6 +22,7 @@ module.exports = (app, allModels) => {
   app.post('/',loginControllerCallbacks.loginCheck);
   app.post('/register',loginControllerCallbacks.addUser);
   app.get('/home/:username',loginControllerCallbacks.home);
+  app.post('/changesettings',loginControllerCallbacks.changeSettings)
   app.get('/logout',loginControllerCallbacks.logout);
 
   //book routes

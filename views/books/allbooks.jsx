@@ -19,9 +19,9 @@ class Allbooks extends React.Component {
 		    	<HEAD>
 		    		<title>Social Library: The Exchange </title>
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
-		    	</HEAD>
+		    	</HEAD>  
 		    	<BODY>
-		    		<NAVBAR username={this.props.username} />
+		    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo = {this.props.userDetails.user_photo} />
 		    		<div className = {'container-fluid'} >
 		    			<div className={'search-bar'}>
 		    				<form method={'GET'} action={'/books'}>
@@ -51,7 +51,7 @@ class Allbooks extends React.Component {
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR username={this.props.username} />
+		    		<NAVBAR username={this.props.user.username} name={this.props.user.user_name} photo = {this.props.user.user_photo}/>
 		    		<div className = {'container-fluid'} >
 		    			<div className={'search-bar'}>
 		    				<form method={'GET'} action={'/books'}>

@@ -1,7 +1,3 @@
-const sha256=require('js-sha256');
-const PSALT = 'sErceT pAsSwoRd adDiTioNaL pHraSe';
-
-
 /**
  * ===========================================
  * Export model functions as a module
@@ -14,7 +10,7 @@ module.exports = (dbPoolInstance) => {
     let values = [username];
     dbPoolInstance.query(queryString,values,(error,queryResult)=>{
       if(error){
-        console.log('1'+error);
+        console.log(error);
         callback(error,false);
       } else {
         let result = (queryResult.rows.length>0) ? queryResult.rows : [];
@@ -26,13 +22,24 @@ module.exports = (dbPoolInstance) => {
         let values = [username];
         dbPoolInstance.query(queryString,values,(error,queryResult)=>{
           if(error){
-            console.log('2'+error);
+            console.log(error);
             callback(error,false);
           } else {
-            console.log(queryResult.rows);
             let result = (queryResult.rows.length>0) ? queryResult.rows : [];
             data.myRequest=result;
-            callback(null,data);
+
+            let queryString = "SELECT id, username, user_name, user_photo FROM users WHERE username = $1";
+            let values = [username];
+
+            dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+              if(error){
+                console.log(error);
+                callback(error,false);
+              } else {
+                data.userDetails = queryResult.rows[0];
+                callback(null,data);
+              }
+            })
           }
         });
       }
@@ -106,7 +113,7 @@ module.exports = (dbPoolInstance) => {
   }
 
   let rejectRequest = (callback,request_id) =>{
-    let queryString = "UPDATE swap SET swap_status = 'cancelled' WHERE id = $1";
+    let queryString = "UPDATE swap SET swap_status = 'cancelled' WHERE id = $1 RETURNING book_id";
 
     let values = [parseInt(request_id)];
 
@@ -115,7 +122,17 @@ module.exports = (dbPoolInstance) => {
         console.log(error);
         callback(error);
       } else {
-        callback(null);
+        let queryString = "UPDATE books SET book_status = 'available' WHERE id = $1";
+        let values = [queryResult.rows[0].book_id];
+
+        dbPoolInstance.query(queryString,values, (error, queryResult)=>{
+          if(error){
+            console.log(error);
+            callback(error);
+          } else {
+             callback(null);
+          }
+        })
       }
     });
   }
@@ -133,7 +150,8 @@ module.exports = (dbPoolInstance) => {
       } else if (queryResult.rows.length>0){
         //owner of book of request
           var data = {
-              ownerDetail: queryResult.rows[0]
+              ownerDetail: queryResult.rows[0],
+              userDetails: queryResult.rows[0]
           }
 
           let queryString="SELECT * FROM (SELECT * FROM swap WHERE id = $1) AS request INNER JOIN (SELECT id AS book_id, book_title, book_author, book_synopsis, book_image, user_id as owner_id FROM books) AS book_details ON (request.book_id = book_details.book_id)";
@@ -153,8 +171,7 @@ module.exports = (dbPoolInstance) => {
                   console.log(error);
                   callback(error,null,null);
                 } else {
-                  data.recipientDetails = queryResult.rows[0];
-                  console.log()
+                  data.recipientDetails = queryResult.rows[0];      
                   callback (null,true,data);
                 }
               })
@@ -170,9 +187,10 @@ module.exports = (dbPoolInstance) => {
               console.log('1'+error);
               callback(error,null,null);
             } else if(queryResult.rows.length>0) {
-              //recipient of bookr equest
+              //recipient of book request
               var data = {
-                recipientDetails: queryResult.rows[0]
+                recipientDetails: queryResult.rows[0],
+                userDetails: queryResult.rows[0]
               }
 
               let queryString = "SELECT owner_id, username,user_name,user_photo FROM (SELECT * FROM swap where id = $1) AS request INNER JOIN users ON (request.owner_id=users.id)";

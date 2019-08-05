@@ -16,13 +16,13 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.recipient_username}</td>
 							<td className={"align-middle"}>Pending Accept</td>
 							<td className={"align-middle"}>
-								<form method={'POST'} action={'/request/'+this.props.username+'/accept?_method=PUT'}>
+								<form method={'POST'} action={'/request/'+this.props.userDetails.username+'/accept?_method=PUT'}>
 	  								<input type={"hidden"} name={"request"} defaultValue={request.id} />
 	  								<button className={'btn btn-dark'} type={'submit'}>Accept Request</button>
 	  							</form><br /> 
-	  							<form method={'POST'} action={'/request/'+this.props.username+'/reject?_method=PUT'}>
+	  							<form method={'POST'} action={'/request/'+this.props.userDetails.username+'/reject?_method=PUT'}>
 	  								<input type={"hidden"} name={"request"} defaultValue={request.id} />
-	  								<button className={'btn btn-light'} type={'submit'}>Reject Request</button>
+	  								<button className={'btn btn-danger'} type={'submit'}>Reject Request</button>
 	  							</form>
 	  						</td>
 						</tr>
@@ -35,7 +35,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.recipient_username}</td>
 							<td className={"align-middle"}>Pending Swap</td>
 							<td className={"align-middle"}>
-								<a href={'/request/'+this.props.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
+								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
 	  						</td>
 						</tr>
 	  				);
@@ -46,7 +46,9 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.book_author}</td>
 							<td className={"align-middle"}>{request.recipient_username}</td>
 							<td className={"align-middle"}>Request Cancelled</td>
-							<td className={"align-middle"}>-</td>
+							<td className={"align-middle"}>
+								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-danger'}>Go to Request</button></a>
+							</td>
 						</tr>
 	  			);
 	  		} else if (request.swap_status === "completed") {
@@ -57,7 +59,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.recipient_username}</td>
 							<td className={"align-middle"}>Completed</td>
 							<td className={"align-middle"}>
-								<a href={'/request/'+this.props.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
+								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-success'}>Go to Request</button></a>
 	  						</td>
 						</tr>
 	  				);
@@ -73,7 +75,12 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.book_author}</td>
 							<td className={"align-middle"}>{request.owner_username}</td>
 							<td className={"align-middle"}>Pending Accept</td>
-							<td className={"align-middle"}>-</td>
+							<td className={"align-middle"}>
+							<form method={'POST'} action={'/request/'+this.props.userDetails.username+'/reject?_method=PUT'}>
+	  								<input type={"hidden"} name={"request"} defaultValue={request.id} />
+	  								<button className={'btn btn-danger'} type={'submit'}>Cancel Request</button>
+	  						</form>
+							</td>
 						</tr>
 	  				);
 	  		} else if (request.swap_status === "pending_swap"){
@@ -84,7 +91,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.owner_username}</td>
 							<td className={"align-middle"}>Pending Swap</td>
 							<td className={"align-middle"}>
-			  					<a href={'/request/'+this.props.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
+			  					<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
 							</td>
 						</tr>
 	  				);
@@ -95,7 +102,9 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.book_author}</td>
 							<td className={"align-middle"}>{request.owner_username}</td>
 							<td className={"align-middle"}>Request Cancelled</td>
-							<td className={"align-middle"}>-</td>
+							<td className={"align-middle"}>
+								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-danger'}>Go to Request</button></a>
+							</td>
 						</tr>
 	  			);
 	  		} else if (request.swap_status === "completed") {
@@ -106,7 +115,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.owner_username}</td>
 							<td className={"align-middle"}>Completed</td>
 							<td className={"align-middle"}>
-								<a href={'/request/'+this.props.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
+								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-success'}>Go to Request</button></a>
 	  						</td>
 						</tr>
 	  				);
@@ -116,11 +125,11 @@ class Allrequest extends React.Component {
 	  	return (
 	    	<html>
 		    	<HEAD>
-		    		<title>Social Library: The Exchange </title>
+		    		<title>Social Library: All Request </title>
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR username={this.props.username} />
+		    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
 		    		<div className = {'container-fluid'}>
 			    		<div className= {'row'}>
 			    			<div className={'offset-3 col-6 mt-5'}>

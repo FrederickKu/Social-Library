@@ -6,16 +6,33 @@ module.exports = (db) => {
    * ===========================================
    */
 
-  let getAllRequest = (request,response) => {
-    let callback = function(error,data) {
-      if (error){
-        response.sendStatus(404);
-      } else {
-        data.username=request.params.username;
-        response.render('request/allrequest',data);
-      }
+  let checkSession=(username, session) =>{
+    let sessionCookie = sha256(`true` + SALT + username);
+    if (sessionCookie === session){
+      return true;
+    } else {
+      return false;
     }
-    db.request.getAllRequest(callback,request.params.username);
+  }
+
+  let getAllRequest = (request,response) => {
+    if ('woof' in request.cookies && 'meow' in request.cookies){
+      if (checkSession(request.cookies.woof,request.cookies.meow)){
+          let callback = function(error,data) {
+            if (error){
+              response.sendStatus(404);
+            } else {
+              response.render('request/allrequest',data);
+            }
+          }
+          db.request.getAllRequest(callback,request.params.username);
+      } else {
+        response.redirect('/');
+      }
+    } else {
+      response.redirect('/');
+    }
+    
   }
 
   let sendRequest = (request,response) => {
@@ -60,20 +77,27 @@ module.exports = (db) => {
   }
 
   let showRequestPage =(request,response)=>{
-    let callback=function(error,authenticate,data){
-      console.log(data);
-      if (error){
-        response.sendStatus(404);
-      } else if (authenticate){
-        data.username=request.params.username;
-        data.requestid=request.params.id;
-        response.render('request/request',data);
-      } else {
-        response.redirect('/home/'+request.cookies.woof);
-      }
-    }
+    if ('woof' in request.cookies && 'meow' in request.cookies){
+      if (checkSession(request.cookies.woof,request.cookies.meow)){
+        let callback=function(error,authenticate,data){
+          if (error){
+            response.sendStatus(404);
+          } else if (authenticate){
+            data.username=request.params.username;
+            data.requestid=request.params.id;
+            response.render('request/request',data);
+          } else {
+            response.redirect('/home/'+request.cookies.woof);
+          }
+        }
 
-    db.request.showRequestPage(callback,request.params.username,request.params.id);
+        db.request.showRequestPage(callback,request.params.username,request.params.id);
+      } else {
+        response.redirect('/');
+      }
+    } else {
+      response.redirect('/');
+    }
   }
 
   let confirmSwap = (request,response) =>{
@@ -87,6 +111,7 @@ module.exports = (db) => {
     }
     db.request.confirmSwap(callback,request.params.username,request.params.id);
   }
+
   /**
    * ===========================================
    * Export controller functions as a module
