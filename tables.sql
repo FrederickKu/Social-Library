@@ -52,9 +52,10 @@ CREATE TABLE IF NOT EXISTS swap (
 
 CREATE TABLE IF NOT EXISTS messages (
 	id SERIAL PRIMARY KEY,
-	book_rental_id INT,
+	request_id INT,
 	message TEXT,
-	user_id
+	user_id INT,
+	message_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 

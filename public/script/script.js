@@ -8,7 +8,7 @@
 
 
 
- var changePassword = function() {
+var changePassword = function() {
 
   let data = {
     oldPassword: document.getElementById('account_current_password').value,

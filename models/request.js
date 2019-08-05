@@ -1,4 +1,4 @@
-/**
+/**  
  * ===========================================
  * Export model functions as a module
  * ===========================================
@@ -69,7 +69,6 @@ module.exports = (dbPoolInstance) => {
         console.log(error);
         callback(error,false);
       } else {
-        console.log(queryResult.rows);
         if (queryResult.rows[0].book_status ==='available') {
           var owner_id = queryResult.rows[0].user_id;
 
@@ -372,13 +371,100 @@ module.exports = (dbPoolInstance) => {
     });
   }
 
+  let postChatMessages = (callback,chatUsername,chatDetails)=>{
+    let queryString="INSERT INTO messages (request_id,user_id,message) VALUES  ($1, (SELECT id FROM users where username = $2),$3) RETURNING *";
+    let values = [chatDetails.request_id, chatUsername,chatDetails.message];
+
+    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+      if(error){
+        console.log(error);
+        callback(error,null);
+      } else {
+        let message = queryResult.rows[0];
+        callback(null,message)
+      }
+    });
+  }
+
+  let getChatMessages = (callback,requestid, loginuser) =>{
+    let queryString ="SELECT id AS request_id, owner_id,recipient_id FROM swap WHERE id =$1 and owner_id = (SELECT id FROM users WHERE username = $2)";
+    let values = [requestid,loginuser];
+
+    dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+      if(error){
+        console.log(error);
+        callback(error,null);
+      } else if (queryResult.rows.length>0){
+        //owner sending message
+        let queryString = "SELECT id, username FROM users WHERE id = $1";
+        let values = [queryResult.rows[0].recipient_id];
+
+        dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+          if(error){
+            console.log(error);
+            callback(error,null);
+          } else {
+            var data = {
+              otheruser: queryResult.rows[0]
+            }
+
+            let queryString = "SELECT * FROM messages where request_id = $1 ORDER BY message_timestamp ASC";
+            let values = [requestid];
+
+            dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+              if(error){
+                console.log(error);
+                callback(error,null);
+              } else {
+                let result = (queryResult.rows.length>0) ? queryResult.rows : [];
+                data.messages = result;
+                callback(null,data);
+              }
+            })
+          }
+        })
+      } else{
+        //recipient sending message
+          let queryString = "SELECT owner_id AS id, username FROM users INNER JOIN swap ON (users.id = swap.owner_id) WHERE swap.id = $1";
+          let values = [requestid];
+
+          dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+            if(error){
+              console.log(error);
+              callback(error,null);
+            } else {
+              var data = {
+                otheruser: queryResult.rows[0]
+              }
+
+              let queryString = "SELECT * FROM messages where request_id = $1 ORDER BY message_timestamp ASC";
+              let values = [requestid];
+
+              dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                if(error){
+                  console.log(error);
+                  callback(error,null);
+                } else {
+                  let result = (queryResult.rows.length>0) ? queryResult.rows : [];
+                  data.messages = result;
+                  callback(null,data);
+                }
+              })
+            }
+          })
+      } 
+    })
+  }
+
   return {
     getAllRequest,
     sendRequest,
     acceptRequest,
     rejectRequest,
     showRequestPage,
-    confirmSwap
+    confirmSwap,
+    postChatMessages,
+    getChatMessages
   };
 
 };

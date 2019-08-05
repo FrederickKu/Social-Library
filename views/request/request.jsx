@@ -1,5 +1,5 @@
 var React = require("react");
-var HEAD = require('../layouts/head.jsx');
+var HEAD = require('../layouts/head.jsx')
 var BODY = require('../layouts/body.jsx');
 var NAVBAR = require('../layouts/navbar.jsx');
 var BOOKCARD = require('../components/bookCard.jsx');
@@ -53,10 +53,13 @@ class RequestPage extends React.Component {
 			    					</div>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+				    				<h2> Chat box</h2>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}  placeholder={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -106,10 +109,12 @@ class RequestPage extends React.Component {
 			    					</div>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}   placeholder ={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -165,10 +170,12 @@ class RequestPage extends React.Component {
 		  							</form>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}   placeholder ={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -223,10 +230,12 @@ class RequestPage extends React.Component {
 		  							</form>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}   placeholder ={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -284,11 +293,13 @@ class RequestPage extends React.Component {
 	  								</form>			    						
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}   placeholder ={'Add Message'} />
 			    				</div>
 
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -346,10 +357,12 @@ class RequestPage extends React.Component {
 	  								</form>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}   placeholder ={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -408,10 +421,13 @@ class RequestPage extends React.Component {
 	  								</form>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+				    				<h2> Chat box</h2>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}  placeholder={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);
@@ -469,10 +485,12 @@ class RequestPage extends React.Component {
 	  								</form>
 				    			</div>
 				    			<div className={'col-6 mt-5'} id={'request-chat-box'}>
-			    					<p> Chat Feature Coming Soon! </p>
+			    					<div id={'chat-area'}></div>
+			    					<input type={'text'} className={'chat-input'} id={this.props.requestid}  placeholder ={'Add Message'} />
 			    				</div>
 			    			</div>
 			    		</div>
+	   		          <script src={'/script/chatscript.js'} />
 			    	</BODY>
 		        </html>   
     		);

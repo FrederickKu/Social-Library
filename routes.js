@@ -36,11 +36,14 @@ module.exports = (app, allModels) => {
 
   //request routes
   app.post('/books/:id/request', requestControllerCallbacks.sendRequest);
+  app.get('/request/chat/:id',requestControllerCallbacks.getChatMessages);
+  app.post('/request/chat/:id',requestControllerCallbacks.postChatMessages);
   app.get('/request/:username', requestControllerCallbacks.getAllRequest);
   app.put('/request/:username/accept',requestControllerCallbacks.acceptRequest);
   app.put('/request/:username/reject',requestControllerCallbacks.rejectRequest);
   app.get('/request/:username/:id',requestControllerCallbacks.showRequestPage);
   app.put('/request/:username/:id/confirm',requestControllerCallbacks.confirmSwap);
+  
   
   app.get('*', loginControllerCallbacks.redirectLogin);
 

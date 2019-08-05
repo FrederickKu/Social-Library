@@ -382,12 +382,64 @@ Individual Request Page
 }
 
 #request-chat-box {
-	height: 80vh;
-	border: 2px solid black;
 	text-align:center;
-	padding-top: 18%;
 	font-size:3rem;
+}
+
+#chat-area {
+	width: 80%;
+	height: 70vh;
+	max-height:70vh;
+	overflow: scroll;
+	margin: 0 auto;
+	border:1px solid black;
+}
+
+.owner-message,
+.other-message {
+	width: auto;
+	max-width: 40%;
+	font-size: 1.1rem;
+	padding: 2%;
+	border-radius: 50px;
+	color: white;
+}
+
+.owner-message >p,
+.other-message >p {
+	margin: 0;
+}
+
+.other-message span{
 	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem;
+}
+
+
+.owner-message {
+	text-align: right;
+	margin-right: 3%;
+	margin-top: 3%;
+	float:right;
+	background-color: green;
+	clear: both;
+}
+
+.other-message {
+	text-align: left;
+	margin-left: 3%;
+	margin-top: 3%;
+	float:left;
+	background-color: grey;
+	clear: both;
+}
+
+.chat-input {
+	font-size: 1.3rem;
+	width: 80%;
+	border-radius: 50px;
+	padding: 10px;
 }
 
 #owner-arrow,

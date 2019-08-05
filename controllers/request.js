@@ -5,7 +5,7 @@ module.exports = (db) => {
 
   /**
    * ===========================================
-   * Login Controllers
+   *Request Controllers
    * ===========================================
    */
 
@@ -63,7 +63,7 @@ module.exports = (db) => {
       }
 
     }
-
+  
     db.request.acceptRequest(callback, request.body.request)
   }
 
@@ -115,6 +115,28 @@ module.exports = (db) => {
     db.request.confirmSwap(callback,request.params.username,request.params.id);
   }
 
+  let getChatMessages =(request,response)=>{
+    let callback = (error,chatData)=>{
+      if (error){
+        response.sendStatus(404);
+      } else {
+        response.send(chatData);
+      }
+    }
+    db.request.getChatMessages(callback, request.params.id, request.cookies.woof);
+  }
+
+  let postChatMessages =(request,response)=>{
+    let callback=(error,chatData) => {
+      if (error){
+        response.sendStatus(404);
+      } else {
+        response.send(chatData);
+      }
+    }
+    db.request.postChatMessages(callback,request.cookies.woof,request.body);
+  }
+
   /**
    * ===========================================
    * Export controller functions as a module
@@ -126,7 +148,9 @@ module.exports = (db) => {
     acceptRequest:acceptRequest,
     rejectRequest:rejectRequest,
     showRequestPage:showRequestPage,
-    confirmSwap:confirmSwap
+    confirmSwap:confirmSwap,
+    getChatMessages:getChatMessages,
+    postChatMessages:postChatMessages
   };
 
 }
