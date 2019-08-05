@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS books (
 	book_synopsis TEXT,
 	book_image  TEXT,
 	user_id INT,
-	book_status TEXT
+	book_status TEXT,
+	created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 

@@ -42,7 +42,7 @@ INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,
 INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,user_id) VALUES ('available','Invisible Man','Ralph Ellison','First published in 1952 and immediately hailed as a masterpiece, Invisible Man is one of those rare novels that have changed the shape of American literature. For not only does Ralph Ellison nightmare journey across the racial divide tell unparalleled truths about the nature of bigotry and its effects on the minds of both victims and perpetrators, it gives us an entirely new model of what a novel can be.','https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1556482805l/16981._SY475_.jpg',5);
 
 INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,user_id) VALUES ('available','The Time Machine','H.G. Wells','So begins the Time Traveller’s astonishing firsthand account of his journey 800,000 years beyond his own era—and the story that launched H.G. Wells’s successful career and earned him his reputation as the father of science fiction. With a speculative leap that still fires the imagination, Wells sends his brave explorer to face a future burdened with our greatest hopes...and our darkest fears. A pull of the Time Machine’s lever propels him to the age of a slowly dying Earth. There he discovers two bizarre races—the ethereal Eloi and the subterranean Morlocks—who not only symbolize the duality of human nature, but offer a terrifying portrait of the men of tomorrow as well. Published in 1895, this masterpiece of invention captivated readers on the threshold of a new century. Thanks to Wells’s expert storytelling and provocative insight, The Time Machinewill continue to enthrall readers for generations to come.','https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327942880l/2493.jpg',4);
-
+  
 INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,user_id) VALUES ('available','David Copperfield','Charles Dickens','David Copperfield is the story of a young man adventures on his journey from an unhappy and impoverished childhood to the discovery of his vocation as a successful novelist. Among the gloriously vivid cast of characters he encounters are his tyrannical stepfather, Mr Murdstone; his brilliant, but ultimately unworthy school-friend James Steerforth; his formidable aunt, Betsey Trotwood; the eternally humble, yet treacherous Uriah Heep; frivolous, enchanting Dora Spenlow; and the magnificently impecunious Wilkins Micawber, one of literature great comic creations. In David Copperfield - the novel he described as his favourite child - Dickens drew revealingly on his own experiences to create one of the most exuberant and enduringly popular works, filled with tragedy and comedy in equal measure. This edition uses the text of the first volume publication of 1850, and includes updated suggestions for further reading, original illustrations by Phiz, a revised chronology and expanded notes. In his new introduction, Jeremy Tambling discusses the novel autobiographical elements, and its central themes of memory and identity.','https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1461452762l/58696._SY475_.jpg',5);
 
 INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,user_id) VALUES ('available','Room','Emma Donoghue','To five-year-old-Jack, Room is the world....','https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1554546259l/7937843.jpg',5);
@@ -59,53 +59,53 @@ INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,
 
 INSERT INTO books (book_status, book_title,book_author,book_synopsis,book_image,user_id) VALUES ('available','Number the Stars','Lois Lowry','Ten-year-old Annemarie Johansen and her best friend Ellen Rosen often think of life before the war. Its now 1943 and their life in Copenhagen is filled with school, food shortages, and the Nazi soldiers marching through town. When the Jews of Denmark are "relocated," Ellen moves in with the Johansens and pretends to be one of the family. Soon Annemarie is asked to go on a dangerous mission to save Ellens life.','https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1370917812l/47281.jpg',1);
 
-/*users_books*/
+/*book_ownerhistory*/
 
-INSERT INTO users_books(user_id,book_id) VALUES (4,1);
-INSERT INTO users_books(user_id,book_id) VALUES (3,2);
-INSERT INTO users_books(user_id,book_id) VALUES (4,3);
-INSERT INTO users_books(user_id,book_id) VALUES (3,4);
-INSERT INTO users_books(user_id,book_id) VALUES (4,5);
-INSERT INTO users_books(user_id,book_id) VALUES (3,6);
-INSERT INTO users_books(user_id,book_id) VALUES (3,7);
-INSERT INTO users_books(user_id,book_id) VALUES (1,8);
-INSERT INTO users_books(user_id,book_id) VALUES (3,9);
-INSERT INTO users_books(user_id,book_id) VALUES (3,10);
-INSERT INTO users_books(user_id,book_id) VALUES (3,11);
-INSERT INTO users_books(user_id,book_id) VALUES (1,12);
-INSERT INTO users_books(user_id,book_id) VALUES (4,13);
-INSERT INTO users_books(user_id,book_id) VALUES (1,14);
-INSERT INTO users_books(user_id,book_id) VALUES (3,15);
-INSERT INTO users_books(user_id,book_id) VALUES (1,16);
-INSERT INTO users_books(user_id,book_id) VALUES (4,17);
-INSERT INTO users_books(user_id,book_id) VALUES (4,18);
-INSERT INTO users_books(user_id,book_id) VALUES (1,19);
-INSERT INTO users_books(user_id,book_id) VALUES (4,20);
-INSERT INTO users_books(user_id,book_id) VALUES (4,21);
-INSERT INTO users_books(user_id,book_id) VALUES (1,22);
-INSERT INTO users_books(user_id,book_id) VALUES (3,23);
-INSERT INTO users_books(user_id,book_id) VALUES (4,24);
-INSERT INTO users_books(user_id,book_id) VALUES (3,25);
-INSERT INTO users_books(user_id,book_id) VALUES (3,26);
-INSERT INTO users_books(user_id,book_id) VALUES (1,27);
-INSERT INTO users_books(user_id,book_id) VALUES (3,28);
-INSERT INTO users_books(user_id,book_id) VALUES (1,29);
-INSERT INTO users_books(user_id,book_id) VALUES (4,30);
-INSERT INTO users_books(user_id,book_id) VALUES (4,1);
-INSERT INTO users_books(user_id,book_id) VALUES (1,2);
-INSERT INTO users_books(user_id,book_id) VALUES (3,3);
-INSERT INTO users_books(user_id,book_id) VALUES (3,4);
-INSERT INTO users_books(user_id,book_id) VALUES (1,5);
-INSERT INTO users_books(user_id,book_id) VALUES (4,6);
-INSERT INTO users_books(user_id,book_id) VALUES (4,7);
-INSERT INTO users_books(user_id,book_id) VALUES (3,8);
-INSERT INTO users_books(user_id,book_id) VALUES (1,9);
-INSERT INTO users_books(user_id,book_id) VALUES (1,10);
-INSERT INTO users_books(user_id,book_id) VALUES (3,11);
-INSERT INTO users_books(user_id,book_id) VALUES (1,12);
-INSERT INTO users_books(user_id,book_id) VALUES (3,13);
-INSERT INTO users_books(user_id,book_id) VALUES (4,31);
-INSERT INTO users_books(user_id,book_id) VALUES (1,32);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,1);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,2);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,3);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,4);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,5);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,6);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,7);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,8);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,9);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,10);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,11);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,12);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,13);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,14);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,15);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,16);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,17);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,18);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,19);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,20);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,21);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,22);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,23);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,24);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,25);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,26);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,27);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,28);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,29);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,30);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,1);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,2);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,3);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,4);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,5);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,6);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,7);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,8);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,9);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,10);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,11);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,12);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (3,13);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (4,31);
+INSERT INTO book_ownerhistory(user_id,book_id) VALUES (1,32);
 
 /*book_review*/
 
