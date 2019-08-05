@@ -37,12 +37,25 @@ module.exports = (dbPoolInstance) => {
                 callback(error,false);
               } else {
                 data.userDetails = queryResult.rows[0];
-                callback(null,data);
+
+                let queryString = "SELECT * FROM (SELECT * FROM (SELECT id AS request_id, owner_id, recipient_id,  swap_status, book_id FROM swap WHERE owner_id = (SELECT id FROM users WHERE username = $1) AND swap_status='pending_accept') as requestDetails INNER JOIN books ON (requestDetails.book_id = books.id)) AS swapBook INNER JOIN (SELECT id AS recipient_id, username FROM users) AS recipientDetails ON (swapBook.recipient_id = recipientDetails.recipient_id)";
+                let values = [username];
+
+                dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                    if(error){
+                      console.log(error);
+                      callback(error,null);
+                    } else {
+                      let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+                      data.pending = result;
+                      callback(null,data);
+                    }
+                });
               }
             })
           }
         });
-      }
+      }  
     });
   };
 
@@ -171,8 +184,21 @@ module.exports = (dbPoolInstance) => {
                   console.log(error);
                   callback(error,null,null);
                 } else {
-                  data.recipientDetails = queryResult.rows[0];      
-                  callback (null,true,data);
+                  data.recipientDetails = queryResult.rows[0];
+
+                  let queryString = "SELECT * FROM (SELECT * FROM (SELECT id AS request_id, owner_id, recipient_id,  swap_status, book_id FROM swap WHERE owner_id = (SELECT id FROM users WHERE username = $1) AND swap_status='pending_accept') as requestDetails INNER JOIN books ON (requestDetails.book_id = books.id)) AS swapBook INNER JOIN (SELECT id AS recipient_id, username FROM users) AS recipientDetails ON (swapBook.recipient_id = recipientDetails.recipient_id)";
+                  let values = [username];
+
+                  dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                      if(error){
+                        console.log(error);
+                        callback(error,null,null);
+                      } else {
+                        let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+                        data.pending = result;
+                        callback (null,true,data);
+                      }
+                  });      
                 }
               })
             }
@@ -212,7 +238,20 @@ module.exports = (dbPoolInstance) => {
                       callback(error,null,null);
                     } else {
                       data.requestBookDetail=queryResult.rows[0];
-                      callback(null,true,data);
+
+                      let queryString = "SELECT * FROM (SELECT * FROM (SELECT id AS request_id, owner_id, recipient_id,  swap_status, book_id FROM swap WHERE owner_id = (SELECT id FROM users WHERE username = $1) AND swap_status='pending_accept') as requestDetails INNER JOIN books ON (requestDetails.book_id = books.id)) AS swapBook INNER JOIN (SELECT id AS recipient_id, username FROM users) AS recipientDetails ON (swapBook.recipient_id = recipientDetails.recipient_id)";
+                      let values = [username];
+
+                      dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                          if(error){
+                            console.log(error);
+                            callback(error,null,null);
+                          } else {
+                            let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+                            data.pending = result;
+                            callback (null,true,data);
+                          }
+                      });   
                     }
                   })
                 }

@@ -43,3 +43,8 @@
 }
 
 document.getElementById('confirmChange').onclick=changePassword;
+
+if(document.getElementsByClassName('notification-container').length>0){
+  document.getElementById('red-circle').innerText = document.getElementsByClassName('notification-container').length;
+  document.getElementById('red-circle').style.display='initial';
+}

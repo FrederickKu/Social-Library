@@ -2,6 +2,27 @@ var React = require("react");
 
 class Navbar extends React.Component {
   render() {
+
+    let notification = this.props.pending.map(item =>{
+      return (
+        <div>
+        <a className={"dropdown-item px-2"} href={'/request/'+this.props.username}>
+          <div className ={'notification-container'}>
+              <div className={'notificationleft'}>
+                <img src={item.book_image} />
+              </div>
+              <div className={'notificationright'}>
+                <p>{item.book_title}</p>
+                <p>Request By: {item.username}</p>
+              </div>
+              <div style={{clear: 'both'}}></div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+        </div>
+      );
+    })
+
     return (
       	<nav className={"container navbar navbar-expand navbar-light"}>
           <img src={'/img/logotnav.png'} id={'navbarLogo'} />
@@ -21,12 +42,20 @@ class Navbar extends React.Component {
                 <a className={"nav-item active nav-link"} href={'/books'}>The Exchange</a>
             </div>
             <div className={"nav navbar-nav mr-0"} id={'profilecontainer'}>
-                <div className={'nav-item'}>  
-                  <p id={'profiletext'}>{this.props.username}<br />{this.props.name}</p>
+                <div class="nav-item dropdown" >
+                  <a class="nav-link dropdown-toggle" href="#" id="bellimagecontainer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img id={'notification-bell'} src={'/img/bell.png'} /></a>
+                  <p id={'red-circle'}></p>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <p id={'notificationtext'}>Pending Requests</p>
+                    <div class="dropdown-divider"></div>
+                    {notification}
+                  </div>
                 </div>
                 <div class="nav-item dropdown" >
                   <a class="nav-link dropdown-toggle" href="#" id="profileimagecontainer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img id={'navprofile'} src={this.props.photo} /></a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <p id={'profiletext'}>User: {this.props.username}</p>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" id={'account-setting-link'} href="#" data-toggle={"modal"} data-target={"#editAccountModal"}>Account Settings</a>
                     <a class="dropdown-item" href={'/logout'}>Logout</a>
                   </div>

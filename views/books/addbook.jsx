@@ -13,7 +13,7 @@ class Addbook extends React.Component {
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.username} name={this.props.user_name} photo={this.props.user_photo} />
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 						<div className = {'container'} >
 							<div className={'row'}>
 				    			<div className={'col-10 offset-1 addForm mt-5'}>

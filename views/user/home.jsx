@@ -24,7 +24,7 @@ class Home extends React.Component {
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR name={this.props.name} username={this.props.username} photo={this.props.photo}/>
+		    		<NAVBAR name={this.props.name} username={this.props.username} photo={this.props.photo} pending={this.props.pending}/>
 		    		<div className={'container-fluid'}>
 		    			<div className={'row'}>
 		    				<div className={'col-2 offset-2'}>
@@ -69,7 +69,7 @@ class Home extends React.Component {
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR name={this.props.name} username={this.props.username} photo={this.props.photo}/>
+		    		<NAVBAR name={this.props.name} username={this.props.username} photo={this.props.photo} pending={this.props.pending}/>
 		    		<div className={'container-fluid'}>
 		    			<div className={'row'}>
 			    			<div className={'col-2 offset-2'}>

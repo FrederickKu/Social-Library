@@ -58,7 +58,7 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let getUserInfo = (callback,username,query) => {
+  let getUserInfo = (callback,username,loginuser,query) => {
     if (query === undefined){
       let queryString = "SELECT * FROM (SELECT id AS user_id, user_name,user_photo FROM users) AS u INNER JOIN books ON (u.user_id = books.user_id) WHERE books.user_id = (SELECT id FROM users WHERE username = $1)";
       let values = [username];
@@ -82,7 +82,20 @@ module.exports = (dbPoolInstance) => {
                     photo:queryResult.rows[0].user_photo,
                     books:[]
                   }
-                  callback(null,data);
+
+                  let queryString = "SELECT * FROM (SELECT * FROM (SELECT id AS request_id, owner_id, recipient_id,  swap_status, book_id FROM swap WHERE owner_id = (SELECT id FROM users WHERE username = $1) AND swap_status='pending_accept') as requestDetails INNER JOIN books ON (requestDetails.book_id = books.id)) AS swapBook INNER JOIN (SELECT id AS recipient_id, username FROM users) AS recipientDetails ON (swapBook.recipient_id = recipientDetails.recipient_id)";
+                  let values = [loginuser];
+
+                  dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                      if(error){
+                        console.log(error);
+                        callback(error,null);
+                      } else {
+                      let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+                      data.pending = result;
+                        callback(null,data);
+                      }
+                  });
                 }
               })
             } else {
@@ -92,7 +105,20 @@ module.exports = (dbPoolInstance) => {
                   photo:queryResult.rows[0].user_photo,
                   books:queryResult.rows
                 }
-                callback(null,data);
+
+                let queryString = "SELECT * FROM (SELECT * FROM (SELECT id AS request_id, owner_id, recipient_id,  swap_status, book_id FROM swap WHERE owner_id = (SELECT id FROM users WHERE username = $1) AND swap_status='pending_accept') as requestDetails INNER JOIN books ON (requestDetails.book_id = books.id)) AS swapBook INNER JOIN (SELECT id AS recipient_id, username FROM users) AS recipientDetails ON (swapBook.recipient_id = recipientDetails.recipient_id)";
+                let values = [loginuser];
+
+                dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                    if(error){
+                      console.log(error);
+                      callback(error,null);
+                    } else {
+                      let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+                      data.pending = result;
+                      callback(null,data);
+                    }
+                });
             }
         }
       })
@@ -131,7 +157,20 @@ module.exports = (dbPoolInstance) => {
                   data.username=username;
                   data.name = queryResult.rows[0].user_name;
                   data.photo = queryResult.rows[0].user_photo;
-                  callback(null,data);
+
+                  let queryString = "SELECT * FROM (SELECT * FROM (SELECT id AS request_id, owner_id, recipient_id,  swap_status, book_id FROM swap WHERE owner_id = (SELECT id FROM users WHERE username = $1) AND swap_status='pending_accept') as requestDetails INNER JOIN books ON (requestDetails.book_id = books.id)) AS swapBook INNER JOIN (SELECT id AS recipient_id, username FROM users) AS recipientDetails ON (swapBook.recipient_id = recipientDetails.recipient_id)";
+                  let values = [loginuser];
+
+                  dbPoolInstance.query(queryString,values,(error,queryResult)=>{
+                    if(error){
+                      console.log(error);
+                      callback(error,null);
+                    } else {
+                      let result=(queryResult.rows.length>0) ? queryResult.rows : [];
+                      data.pending = result;
+                      callback(null,data);
+                    }
+                  })
                 }
               })
             }

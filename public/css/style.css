@@ -2,7 +2,6 @@ main {
 	padding-top: 1%;
 	min-height: 100vh;
 }
-
 /*
 NAVBAR STYLING
 */
@@ -26,17 +25,20 @@ nav {
 	align-items: center;
 	text-align: right;
 }
-#profileimagecontainer {
+#profileimagecontainer,
+#bellimagecontainer {
 	display: inline-block;
 	width:3.5vw;
 }
 
-#profiletext {
-	font-size:1rem;
-	margin:0;
+#profiletext,
+#notificationtext {
+	font-size:1.2rem;
+	margin-left: 12%;
 }
 
-#navprofile {
+#navprofile,
+#notification-bell {
 	width: 99%;
 	box-sizing: border-box;
 }
@@ -52,6 +54,50 @@ nav {
 #editAccountModal{
 	text-align: left;
 }
+
+.notification-container,
+#notificationtext {
+	width: 13rem;
+}
+
+.notificationleft{
+	float: left;
+	display: inline-block;
+	width: 25%;
+}
+
+.notificationleft>img{
+	width: 99%;
+}
+
+.notificationright{
+	float:right;
+	width: 70%;
+	display: inline-block;
+}
+
+.notificationright>p{
+	margin: 0;
+	font-size: 1rem;
+}
+
+#red-circle{
+	display:none;
+	position: absolute;
+	width:1vw;
+	height: 1vw;
+	background-color: red;
+	border-radius: 50%;
+	color:white;
+	font-weight: bold;
+	font-size:0.8rem;
+	padding:0;
+	text-align:center;
+	top: 20%;
+    right: 11%;
+    margin: 0;
+}
+
 
 /*
 BookCard Styling
@@ -164,11 +210,13 @@ Profile Card
 }
 
 .profile-card-body {
+	width: 90%;
 	margin: 0 auto;
 }
 
 .profile-card-body>h5{
 	font-size: 1.3rem;
+	text-align:center;
 }
 
 /*

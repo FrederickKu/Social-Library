@@ -16,7 +16,7 @@ class RequestPage extends React.Component {
 			    		<link rel={"stylesheet"} href={`/css/style.css`} />
 			    	</HEAD>
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -69,7 +69,7 @@ class RequestPage extends React.Component {
 			    		<link rel={"stylesheet"} href={`/css/style.css`} />
 			    	</HEAD>
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -124,7 +124,7 @@ class RequestPage extends React.Component {
 			    	</HEAD>
 
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending}/>
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -182,7 +182,7 @@ class RequestPage extends React.Component {
 			    	</HEAD>
 
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -240,7 +240,7 @@ class RequestPage extends React.Component {
 			    	</HEAD>
 
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -302,7 +302,7 @@ class RequestPage extends React.Component {
 			    	</HEAD>
 
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending}/>
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -363,7 +363,7 @@ class RequestPage extends React.Component {
 			    	</HEAD>
 
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending}/>
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>
@@ -425,7 +425,7 @@ class RequestPage extends React.Component {
 			    	</HEAD>
 
 			    	<BODY>
-			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+			    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending}/>
 			    		<div className = {'container-fluid'} >
 			    			<div className={'row'}>
 				    			<div className={'col-4 offset-1 request-details mt-5'}>

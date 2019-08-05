@@ -35,7 +35,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.recipient_username}</td>
 							<td className={"align-middle"}>Pending Swap</td>
 							<td className={"align-middle"}>
-								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
+								<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-info'}>Go to Request</button></a>
 	  						</td>
 						</tr>
 	  				);
@@ -91,7 +91,7 @@ class Allrequest extends React.Component {
 							<td className={"align-middle"}>{request.owner_username}</td>
 							<td className={"align-middle"}>Pending Swap</td>
 							<td className={"align-middle"}>
-			  					<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-dark'}>Go to Request</button></a>
+			  					<a href={'/request/'+this.props.userDetails.username+'/'+request.id}><button className={'btn btn-info'}>Go to Request</button></a>
 							</td>
 						</tr>
 	  				);
@@ -129,7 +129,7 @@ class Allrequest extends React.Component {
 		    		<link rel={"stylesheet"} href={`/css/style.css`} />
 		    	</HEAD>
 		    	<BODY>
-		    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+		    		<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 		    		<div className = {'container-fluid'}>
 			    		<div className= {'row'}>
 			    			<div className={'offset-3 col-6 mt-5'}>

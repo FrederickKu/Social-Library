@@ -33,7 +33,7 @@ class Individualbook extends React.Component {
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
 				    			<div className={'col-2 offset-3'}>
@@ -141,7 +141,7 @@ class Individualbook extends React.Component {
 					</BODY>
 				</html>   
 			);
-		} else if (this.props.book.swap_status ==='available') {
+		} else if (this.props.book.book_status === 'available') {
 			return (
 				<html>
 					<HEAD>
@@ -149,7 +149,7 @@ class Individualbook extends React.Component {
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending}/>
 						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
 				    			<div className={'col-2 offset-3'}>
@@ -201,7 +201,7 @@ class Individualbook extends React.Component {
 						<link rel={"stylesheet"} href={`/css/style.css`} />
 					</HEAD>
 					<BODY>
-						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} />
+						<NAVBAR username={this.props.userDetails.username} name={this.props.userDetails.user_name} photo={this.props.userDetails.user_photo} pending={this.props.pending} />
 						<div className = {'container-fluid mt-5'} >
 							<div className={'row'}>
 				    			<div className={'col-2 offset-3'}>

@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS swap (
 	owner_handshake BOOLEAN DEFAULT FALSE,
 	recipient_handshake BOOLEAN DEFAULT FALSE,
 	swap_status TEXT,
-	book_id INT,
+	book_id INT, 
 	request_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

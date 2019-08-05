@@ -17,7 +17,7 @@ module.exports = (db) => {
       return false;
     }
   }
-
+ 
 
   let getAllBooks = (request,response) => {
     if ('woof' in request.cookies && 'meow' in request.cookies){
@@ -34,14 +34,15 @@ module.exports = (db) => {
 
             db.books.searchAllBooks(callback,request.query.search,request.cookies.woof)
           } else {
-            let callback = function(error, allBooks, userDetails){
+            let callback = function(error, allBooks, userDetails,pending){
               if (error){
                 response.status(404);
               } else {
                 let data = {
                   books:allBooks,
                   user: userDetails,
-                  searchStatus:false,
+                  pending:pending,
+                  searchStatus:false
                 }
                 response.render('books/allbooks',data);
               }
@@ -120,11 +121,11 @@ module.exports = (db) => {
 
     if ('woof' in request.cookies && 'meow' in request.cookies){
       if (checkSession(request.cookies.woof,request.cookies.meow)){
-          let callback = (error,userDetails) => {
+          let callback = (error,data) => {
             if (error) {
               response.status(404);
             } else {
-              response.render('books/addbook',userDetails)
+              response.render('books/addbook',data)
             }
           }
           db.books.getUserDetails(callback,request.cookies.woof);

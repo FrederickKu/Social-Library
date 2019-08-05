@@ -67,24 +67,26 @@ module.exports = (db) => {
                 if (error) {
                   response.status(404);
                 } else {
+                  console.log(data);
                   data.searchStatus=true;
                   data.querySearch = request.query.search;
                   response.render('user/home',data);
                 }
               }
 
-              db.login.getUserInfo(callback,request.params.username,request.query.search);
+              db.login.getUserInfo(callback,request.params.username,request.cookies.woof,request.query.search);
             } else {
               let callback = function(error, data){
                 if (error){
                   response.status(404);
                 } else {
+                  console.log(data);
                   data.searchStatus=false;
                   response.render('user/home',data);
                 }
               }
               
-              db.login.getUserInfo(callback,request.params.username);
+              db.login.getUserInfo(callback,request.params.username,request.cookies.woof);
             }
       } else {
         response.redirect('/');
