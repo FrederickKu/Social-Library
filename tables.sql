@@ -46,10 +46,6 @@ CREATE TABLE IF NOT EXISTS swap (
 	request_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
-
-
 CREATE TABLE IF NOT EXISTS messages (
 	id SERIAL PRIMARY KEY,
 	request_id INT,
@@ -61,10 +57,11 @@ CREATE TABLE IF NOT EXISTS messages (
 
 
 
-
+/* Not Yet created
 CREATE TABLE IF NOT EXISTS userreviews (
 	id SERIAL PRIMARY KEY,
 	user_id INT,
 	reviewer_id INT,
 	user_review TEXT
 );
+*/

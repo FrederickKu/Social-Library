@@ -8,10 +8,10 @@ class Allbooks extends React.Component {
   render() {
   	if (this.props.searchStatus){
   		var searchBooks = this.props.byTitle.map(book => {
-  			return <BOOKCARD book={book} />
+  			return <BOOKCARD book={book} id={this.props.userDetails.id}/>
   		});
 		var searchAuthor = this.props.byAuthor.map(book => {
-  			return <BOOKCARD book={book} />
+  			return <BOOKCARD book={book} id={this.props.userDetails.id}/>
   		});
 
   		return (
@@ -41,7 +41,7 @@ class Allbooks extends React.Component {
 
 	} else { 
 		var books = this.props.books.map(book => {
-	  		return <BOOKCARD book={book} />
+	  		return <BOOKCARD book={book} id={this.props.user.id} />
 	  	});
 
 	  	return (
