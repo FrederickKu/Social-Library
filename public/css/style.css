@@ -118,7 +118,6 @@ BookCard Styling
 	width: 25rem;
 	height: 15rem;
 	margin-bottom: 2rem;
-	box-shadow: 5px 5px 4px grey;
 }
 
 .bookcard {
@@ -126,12 +125,15 @@ BookCard Styling
 	flex-wrap: wrap;
 	justify-content: center;
 	align-content: center;
+	height: 26vh;
+
 }
 
 .bookcard img {
 	display: inline-block;
 	width: 35%;
 	margin: 0 5%;
+	box-shadow: 5px 5px 4px grey;
 }
 
 #bookcard-link:hover{
@@ -227,6 +229,8 @@ Individual Book Page
 	display:block;
 	width: 80%;
 	margin: 0 auto;
+	box-shadow: 5px 5px 4px grey;
+
 }
 
 #ownerhistory{
