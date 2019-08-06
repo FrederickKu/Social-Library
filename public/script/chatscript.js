@@ -70,10 +70,15 @@ var getMessages =function() {
 
               div.appendChild(messageP);
 
+
               document.getElementById('chat-area').appendChild(div);
           }
         }
       }
+
+      let height = document.getElementById('chat-area').scrollHeight;
+      document.getElementById('chat-area').scrollTop=height;
+
       timeout();    
     };
 
