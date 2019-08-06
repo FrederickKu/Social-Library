@@ -34,7 +34,6 @@ if( process.env.DATABASE_URL ){
 }else{
   configs = {
     user: 'postgres',
-    password:'N3v3rforg3t@',
     host: '127.0.0.1',
     database: 'social_library',
     port: 5432
